@@ -1,0 +1,149 @@
+Chuẩn bị Dữ liệu để Fine-tuning
+
+Chất lượng dữ liệu là yếu tố quan trọng nhất quyết định sự thành công của quá trình fine-tuning.
+Data Curation & Governance (Tuyển chọn và quản trị dữ liệu): Dữ liệu phải sạch, chất lượng cao, cân bằng, và có tính đại diện cho tác vụ hoặc miền cụ thể.36
+Size & Labeling (Kích thước và gắn nhãn): Đối với fine-tuning, dữ liệu cần có kích thước phù hợp (vài nghìn ví dụ trở lên) và được gắn nhãn chính xác.20
+Reinforcement Learning from Human Feedback (RLHF): RLHF là một quy trình tinh chỉnh phức tạp hơn, sử dụng phản hồi của con người để làm cho mô hình hành xử theo những cách được mong muốn (hữu ích, trung thực, vô hại).36 Quy trình này thường bao gồm ba bước tuần tự:
+Thu thập phản hồi của con người: Con người xếp hạng các cặp phản hồi của mô hình dựa trên sở thích của họ.42
+Đào tạo mô hình phần thưởng: Dữ liệu xếp hạng được sử dụng để đào tạo một mô hình phần thưởng (reward model) để dự đoán sở thích của con người một cách tự động.36
+Tối ưu hóa chính sách: Mô hình ban đầu được tinh chỉnh bằng các thuật toán học tăng cường (Reinforcement Learning) để tối đa hóa điểm số phần thưởng từ mô hình phần thưởng.42
+Một điểm khác biệt cơ bản giữa fine-tuning và RLHF là mục tiêu tinh chỉnh. Fine-tuning chủ yếu nhằm cải thiện hiệu suất kỹ thuật của mô hình (ví dụ: độ chính xác, điểm F1) trên một tác vụ cụ thể.20 Ngược lại, RLHF tập trung vào việc
+điều chỉnh HÀNH VI của mô hình, làm cho nó phù hợp với các giá trị, sở thích và đạo đức của con người.36 Điều này giải thích tại sao một mô hình được fine-tune có thể chính xác về mặt kỹ thuật nhưng vẫn có thể đưa ra các câu trả lời "vô cảm" hoặc không phù hợp, trong khi RLHF đảm bảo rằng mô hình không chỉ đúng mà còn hữu ích và an toàn.36
+
+Phần 4: Phương pháp Đánh giá Hiệu suất Mô hình Nền tảng (Domain 3.4)
+
+
+Các Phương pháp Đánh giá Hiệu suất
+
+Việc đánh giá hiệu suất của một mô hình nền tảng là một quá trình đa chiều, kết hợp nhiều phương pháp khác nhau để có cái nhìn toàn diện.
+Human Evaluation (Đánh giá bởi con người): Phương pháp này được sử dụng để đánh giá các chỉ số mang tính chủ quan mà các thuật toán khó đo lường, như mức độ liên quan (relevance), phong cách (style), và mức độ phù hợp với giọng điệu thương hiệu (alignment to brand voice).43 Amazon Bedrock cung cấp công cụ để thiết lập quy trình đánh giá này với đội ngũ nội bộ hoặc với các đánh giá viên do AWS quản lý.43
+Benchmark Datasets (Tập dữ liệu tiêu chuẩn): Sử dụng các tập dữ liệu được tuyển chọn sẵn hoặc tạo mới để đánh giá hiệu suất của mô hình bằng các chỉ số tự động, khách quan như độ chính xác, độ bền và độ an toàn.43
+LLM as a Judge (LLM như một giám khảo): Một phương pháp mới và hiệu quả, sử dụng một LLM mạnh mẽ hơn để đánh giá đầu ra của các LLM khác dựa trên các tiêu chí cụ thể như tính đúng đắn, đầy đủ và độ nguy hại.43
+
+Các Chỉ số Đánh giá Kỹ thuật
+
+Các chỉ số tự động rất quan trọng để so sánh hiệu suất của các mô hình một cách khách quan.
+ROUGE (Recall-Oriented Understudy for Gisting Evaluation): Đây là một chỉ số chủ yếu được sử dụng để đánh giá các tác vụ tóm tắt văn bản.46 ROUGE đo lường
+recall (độ bao phủ) của N-grams và chuỗi con chung dài nhất (Longest Common Subsequence) giữa văn bản được tạo và văn bản tham chiếu, cho biết mức độ tóm tắt của mô hình có chứa các thông tin quan trọng từ tài liệu gốc.46
+BLEU (Bilingual Evaluation Understudy): BLEU là chỉ số được sử dụng rộng rãi để đánh giá chất lượng dịch máy.46 Nó đo lường
+precision (độ chính xác) của N-grams giữa văn bản được dịch và một hoặc nhiều văn bản dịch tham chiếu.46
+BERTScore: BERTScore là một chỉ số hiện đại hơn, vượt trội hơn ROUGE và BLEU vì nó sử dụng các contextual embeddings từ mô hình BERT để đo lường sự tương đồng ngữ nghĩa giữa hai câu.46 Thay vì chỉ dựa vào sự trùng khớp từ khóa, BERTScore hiểu được ý nghĩa của các từ dựa trên ngữ cảnh, cho phép nó đánh giá chính xác hơn các văn bản đã được diễn giải hoặc viết lại.48
+Bảng sau đây so sánh các chỉ số này:
+Chỉ số
+Cơ chế hoạt động
+Ưu điểm
+Nhược điểm
+ROUGE
+Đo lường độ bao phủ (recall) của N-grams và chuỗi con chung dài nhất.
+Tốt cho đánh giá tóm tắt, dễ hiểu.
+Chỉ dựa vào trùng khớp từ, không xét ngữ nghĩa.
+BLEU
+Đo lường độ chính xác (precision) của N-grams.
+Tốt cho đánh giá dịch máy, nhanh và đơn giản.
+Tương tự ROUGE, thiếu hiểu biết ngữ cảnh.
+BERTScore
+Đo lường sự tương đồng ngữ nghĩa bằng contextual embeddings.
+Liên quan chặt chẽ hơn với đánh giá của con người, hiểu được các bản diễn giải.
+Đòi hỏi tài nguyên tính toán cao hơn.
+
+
+Đánh giá Giá trị Kinh doanh của Mô hình
+
+Mặc dù các chỉ số kỹ thuật như BERTScore hay BLEU rất quan trọng để so sánh các mô hình, chúng không trực tiếp đo lường giá trị kinh doanh.6 Một mô hình có điểm BLEU cao chưa chắc đã mang lại lợi nhuận hoặc sự hài lòng cho người dùng.47 Do đó, việc xác định liệu một LLM có đáp ứng mục tiêu kinh doanh hay không đòi hỏi phải thiết lập các chỉ số liên kết trực tiếp với các mục tiêu đó. Việc đánh giá toàn diện phải bao gồm cả hai khía cạnh: đánh giá kỹ thuật trong phòng thí nghiệm và đánh giá tác động kinh doanh trong môi trường thực tế.6
+Năng suất (Productivity): Đánh giá mức độ mô hình giúp tăng tốc quy trình làm việc. Các chỉ số bao gồm số lượng tài liệu được chỉnh sửa hoặc tạo ra với sự trợ giúp của LLM, số lượng người dùng và phiên tạo nội dung.49 Việc sử dụng các công cụ như
+AWS Inferentia có thể giúp giảm chi phí và độ trễ suy luận, trực tiếp cải thiện năng suất.41
+Tương tác người dùng (User Engagement): Đo lường mức độ người dùng tương tác với ứng dụng. Các chỉ số bao gồm số lần bắt đầu trò chuyện (Chat Start), tỷ lệ chấp nhận phản hồi của người dùng (User Acceptance Rate), số lượt nhấp vào liên kết do chatbot cung cấp, và thời gian tương tác trung bình (Interaction Timing).49
+Kỹ thuật Tác vụ (Task Engineering): Đánh giá khả năng của mô hình trong việc hoàn thành các tác vụ phức tạp trong thế giới thực, đặc biệt là đối với các ứng dụng agentic.6 Các chỉ số bao gồm tỷ lệ thành công khi thực hiện một chuỗi hành động và khả năng sử dụng công cụ (tool use evaluation).6
+
+Kết luận
+
+Domain 3 của chứng chỉ AWS Certified AI Practitioner bao gồm các kiến thức cốt lõi để xây dựng các ứng dụng AI tạo sinh có giá trị trong thế giới thực. Việc thành thạo các khái niệm trong domain này không chỉ giúp vượt qua kỳ thi mà còn trang bị cho các chuyên gia những hiểu biết cần thiết để đưa ra các quyết định chiến lược đúng đắn. Quá trình này bắt đầu bằng việc lựa chọn mô hình nền tảng phù hợp dựa trên một khung đánh giá toàn diện, không chỉ giới hạn ở các chỉ số kỹ thuật.6
+Việc hiểu và sử dụng các kỹ thuật prompt engineering một cách hiệu quả là chìa khóa để định hình hành vi của mô hình, nhưng đồng thời cũng phải nhận thức được các rủi ro an ninh tiềm ẩn.28 Tương tự, việc lựa chọn phương pháp tùy chỉnh mô hình, từ fine-tuning cho đến RAG, đòi hỏi phải cân nhắc cẩn thận về chi phí, thời gian và mục tiêu cuối cùng.19 Cuối cùng, việc đánh giá thành công của một ứng dụng AI không chỉ dừng lại ở các chỉ số kỹ thuật, mà phải chuyển hóa thành các chỉ số kinh doanh có ý nghĩa, như năng suất và mức độ tương tác của người dùng.47
+Amazon Bedrock đóng vai trò trung tâm, đơn giản hóa toàn bộ quá trình này bằng cách cung cấp quyền truy cập vào các mô hình hàng đầu và một hệ sinh thái các công cụ mạnh mẽ, từ Knowledge Bases cho RAG đến Agents cho các tác vụ đa bước.13 Việc nắm vững cách sử dụng các dịch vụ này sẽ giúp các chuyên gia tận dụng tối đa tiềm năng của AI tạo sinh để giải quyết các thách thức kinh doanh một cách hiệu quả.
+
+Báo cáo Chuyên sâu: Hướng dẫn về Trí tuệ Nhân tạo Có Trách nhiệm (Responsible AI) trên AWS - Domain 4, Chứng chỉ AWS Certified AI Practitioner
+
+
+Lời Mở Đầu: Đặt Vấn đề về Trí tuệ Nhân tạo Có Trách nhiệm
+
+Trí tuệ nhân tạo (AI) đang thay đổi mọi lĩnh vực của đời sống hiện đại, từ y tế đến tài chính, từ sản xuất đến dịch vụ khách hàng. Sự phát triển nhanh chóng của các công nghệ này đã mở ra những tiềm năng to lớn, nhưng đồng thời cũng đi kèm với các thách thức đáng kể về đạo đức, pháp lý và xã hội. "Trí tuệ Nhân tạo Có Trách nhiệm" (Responsible AI) không chỉ là một thuật ngữ trừu tượng mà là một khung tiêu chuẩn và bộ nguyên tắc toàn diện, đảm bảo rằng các hệ thống AI được phát triển, triển khai và sử dụng một cách an toàn, công bằng và có đạo đức.1 Mục tiêu cốt lõi của Responsible AI là tối ưu hóa những lợi ích mà công nghệ mang lại, đồng thời giảm thiểu các rủi ro và tác động tiêu cực tới con người và xã hội.1 Domain 4 của chứng chỉ AWS Certified AI Practitioner được thiết kế để trang bị cho các chuyên gia AI những kiến thức và công cụ cần thiết để xây dựng các hệ thống đáng tin cậy, công bằng và an toàn. Phần báo cáo này sẽ đi sâu vào các nguyên tắc nền tảng, phân tích các rủi ro tiềm tàng, và mô tả chi tiết các giải pháp thực tiễn mà AWS cung cấp để giải quyết những vấn đề này.
+
+Phần I: Các Nguyên lý Nền tảng của AI Có Trách nhiệm
+
+
+1.1. Khái niệm và Đặc điểm của Trách nhiệm giải trình AI
+
+Trách nhiệm giải trình AI (Responsible AI) được xem là một tập hợp các nguyên tắc và thực tiễn nhằm đảm bảo sự phát triển và sử dụng công nghệ AI một cách an toàn và có đạo đức. Việc tuân thủ các nguyên tắc này không chỉ giúp xây dựng lòng tin vào các hệ thống AI mà còn giảm thiểu rủi ro, đảm bảo rằng các công nghệ này tuân thủ các chuẩn mực pháp lý và đạo đức cần thiết.1 Các nguyên tắc chủ chốt của Responsible AI bao gồm:
+Tính Công bằng và Giảm thiểu Thiên vị (Fairness and Bias Mitigation): Nguyên tắc này yêu cầu mô hình AI phải đưa ra các quyết định công bằng cho tất cả các nhóm nhân khẩu học, tránh phân biệt đối xử dựa trên các đặc điểm như giới tính, tuổi tác, hoặc chủng tộc.1 Một hệ thống công bằng sẽ không thiên vị một nhóm người này hơn một nhóm khác.
+Trách nhiệm giải trình (Accountability): Đây là việc xác định rõ ràng ai là người chịu trách nhiệm đối với các quyết định và hành vi của hệ thống AI.1 Tính năng này đảm bảo rằng các hành động của AI có thể được truy vết và có một thực thể con người chịu trách nhiệm cho các hậu quả của chúng.
+Tính minh bạch (Transparency): Cung cấp khả năng giải thích về cách một mô hình AI đưa ra quyết định.1 Tính minh bạch giúp người dùng hiểu được quá trình suy luận của mô hình, từ đó xây dựng lòng tin vào kết quả đầu ra. Việc này đặc biệt quan trọng trong các ứng dụng có tác động lớn đến cuộc sống con người.3
+Bảo mật và Quyền riêng tư (Security and Privacy): Nguyên tắc này nhấn mạnh việc bảo vệ dữ liệu được xử lý bởi AI, đảm bảo rằng thông tin cá nhân được bảo mật và tuân thủ các quy định về quyền riêng tư hiện hành.1
+Độ mạnh mẽ và An toàn (Robustness and Safety): Đảm bảo mô hình AI hoạt động ổn định và đáng tin cậy trong các điều kiện khác nhau, bao gồm cả khi đối mặt với các nhiễu, biến động bất thường trong dữ liệu, hoặc các cuộc tấn công.5 Một hệ thống mạnh mẽ sẽ không bị sụt giảm hiệu suất một cách đột ngột hoặc thất bại trong việc tạo ra kết quả có ý nghĩa khi các giả định ban đầu bị thay đổi.6
+1.2. Thiết kế Lấy Con người làm Trung tâm (Human-Centered Design - HCD)
+
+Thiết kế Lấy Con người làm Trung tâm (HCD) là một phương pháp tiếp cận trong đó việc phát triển AI được đặt con người, nhu cầu và mong đợi của họ vào trung tâm của mọi quyết định.8 Thay vì chỉ tập trung vào việc làm cho công nghệ hoạt động một cách hiệu quả về mặt kỹ thuật, HCD hướng tới việc đảm bảo rằng công nghệ đó phục vụ con người một cách hiệu quả, an toàn và dễ hiểu. HCD khác biệt với thiết kế lấy người dùng làm trung tâm ở chỗ nó không chỉ hỏi "người dùng sẽ sử dụng sản phẩm này như thế nào?" mà còn bắt đầu với câu hỏi "chúng ta đang giải quyết vấn đề gì cho con người?".10 Nó đặt trọng tâm vào việc thấu hiểu bối cảnh, kỳ vọng và hành trình của các cá nhân, không chỉ là tương tác của họ với sản phẩm.10
+Trong bối cảnh của AI, việc tích hợp HCD là rất quan trọng để đảm bảo sự chấp nhận và tin tưởng. Điều này đặc biệt đúng trong lĩnh vực AI có thể giải thích được (Explainable AI - XAI).3 Các phương pháp XAI truyền thống thường chỉ tập trung vào tính minh bạch của thuật toán, nhưng bỏ qua nhu cầu thực tế của người dùng, đặc biệt là những người không phải chuyên gia.11 HCD giúp đảm bảo rằng các giải thích của AI không chỉ chính xác về mặt kỹ thuật mà còn rõ ràng, dễ hiểu và phù hợp với bối cảnh của người dùng.3 Các nguyên tắc thiết kế như độ rõ ràng, cá nhân hóa, và khả năng tương tác được áp dụng để xây dựng niềm tin và sự chấp nhận từ người dùng. Bằng cách điều chỉnh ngôn ngữ và cách thức truyền đạt thông tin, HCD giúp thu hẹp khoảng cách giữa các thuật toán phức tạp và sự thấu hiểu của con người.10
+Sự kết nối giữa các nguyên tắc AI có trách nhiệm và các giá trị của con người là một khía cạnh quan trọng của HCD. Các đặc điểm của một "người có trách nhiệm" theo các nghiên cứu tâm lý học bao gồm sự chủ động, khả năng nhận lỗi, và không ngừng học hỏi để cải thiện.12 Các nguyên tắc của Responsible AI phản ánh trực tiếp những đặc điểm này: một hệ thống AI có trách nhiệm cũng cần đảm bảo tính chính xác (hoàn thành nhiệm vụ với chất lượng cao), tự giám sát (chủ động quản lý hành vi), và khả năng thích ứng (không bị ảnh hưởng bởi những biến động bất ngờ).12 Việc tích hợp các giá trị này vào quy trình thiết kế không chỉ là một yêu cầu kỹ thuật mà còn là sự mô phỏng các giá trị đạo đức và hành vi tích cực của con người vào hệ thống AI.
+
+Phần II: Phân tích Các Rủi ro và Thách thức trong AI
+
+
+2.1. Thiên vị (Bias) và Độ Công bằng
+
+Thiên vị trong AI là một trong những rủi ro lớn nhất và khó giải quyết nhất, xảy ra khi mô hình đưa ra kết quả không công bằng, thường là do dữ liệu huấn luyện không đa dạng hoặc có định kiến.14 Vấn đề này có thể xuất hiện từ nhiều nguồn khác nhau trong vòng đời phát triển AI.
+Các nguồn gốc của Thiên vị:
+Thiên vị Dữ liệu (Data Bias): Đây là nguyên nhân phổ biến nhất, xuất phát từ việc dữ liệu không đại diện cho thế giới thực hoặc chứa đựng các định kiến lịch sử.14 Ví dụ, một mô hình được huấn luyện trên dữ liệu tuyển dụng lịch sử chỉ ưu tiên nam giới sẽ tự động học và củng cố thiên vị này, dẫn đến việc đưa ra các khuyến nghị tuyển dụng thiếu công bằng.14
+Thiên vị Thuật toán (Algorithmic Bias): Xảy ra khi thiết kế của thuật toán vô tình ưu tiên một nhóm dữ liệu này hơn nhóm khác, ngay cả khi dữ liệu đầu vào là công bằng.15
+Thiên vị Con người (Human Decision Bias): Được đưa vào hệ thống thông qua các quyết định chủ quan của nhà phát triển, từ việc gán nhãn dữ liệu đến việc xác định mục tiêu của mô hình. Những định kiến cá nhân có thể "ngấm" vào hệ thống thông qua các quyết định này.15
+Các loại Thiên vị Phổ biến và Tác động:
+Thiên vị Lựa chọn (Selection Bias): Xảy ra khi dữ liệu huấn luyện không đại diện cho toàn bộ dân số.14 Một ví dụ điển hình là mô hình nhận diện khuôn mặt được huấn luyện chủ yếu trên hình ảnh của người da sáng, dẫn đến khả năng nhận diện kém và tỷ lệ lỗi cao hơn đối với người da sẫm màu, gây ra hậu quả phân biệt đối xử trong các ứng dụng thực tế như thực thi pháp luật.14
+Thiên vị Định kiến (Stereotyping Bias): Mô hình củng cố các khuôn mẫu có hại.14 Một mô hình dịch thuật có thể vô tình liên kết "y tá" với giới tính nữ và "bác sĩ" với giới tính nam, từ đó củng cố những định kiến nghề nghiệp và giới tính không chính xác.14
+
+2.2. Lỗi và Độ tin cậy (Veracity)
+
+Một trong những rủi ro lớn nhất của AI là khả năng tạo ra thông tin sai lệch hoặc không chính xác. Đây là một vấn đề đặc biệt nghiêm trọng với các mô hình AI tạo sinh.
+"Ảo giác" (Hallucinations) trong AI tạo sinh: Là hiện tượng mô hình AI tạo ra thông tin sai lệch, không chính xác nhưng có vẻ hợp lý và thuyết phục.16 Hiện tượng này xảy ra do nhiều nguyên nhân. Một trong số đó là dữ liệu huấn luyện không đầy đủ, không chính xác hoặc có định kiến, dẫn đến việc mô hình học các mẫu sai lệch.16 Hơn nữa, mô hình có thể hiểu sai ngữ cảnh hoặc thiếu sự liên kết với kiến thức thực tế, dẫn đến việc bịa đặt thông tin, thậm chí là tạo ra các liên kết web không tồn tại.16 Một ví dụ điển hình là vụ kiện của một hành khách Air Canada, trong đó chatbot AI đã đưa ra thông tin sai lệch về chính sách giảm giá tang lễ, dẫn đến việc hãng hàng không này phải bồi thường theo phán quyết của tòa án.18 Vụ việc này minh họa rõ hậu quả thực tế của các lỗi do AI gây ra.
+Tính xác thực (Veracity) và Độ mạnh mẽ (Robustness):
+Tính xác thực: Đề cập đến độ chính xác, độ tin cậy và sự phù hợp của dữ liệu.19 Dữ liệu có tính xác thực cao là nền tảng để mô hình AI đưa ra các quyết định hiệu quả và có ý nghĩa.20 Để đảm bảo tính xác thực, cần kiểm tra nguồn dữ liệu, phân tích các thống kê mô tả và thực hiện các bài kiểm tra tính toàn vẹn của dữ liệu.20
+Độ mạnh mẽ: Là khả năng của một mô hình AI duy trì hiệu suất ổn định và đáng tin cậy khi đối mặt với các biến thể, nhiễu hoặc tấn công trong dữ liệu đầu vào.5 Một mô hình mạnh mẽ sẽ tiếp tục hoạt động hiệu quả ngay cả khi điều kiện môi trường thay đổi hoặc dữ liệu có sự xáo trộn nhỏ.6 Khả năng này là cực kỳ quan trọng đối với các hệ thống AI trong các lĩnh vực yêu cầu độ an toàn cao như y tế và xe tự lái.7
+Thiên vị, "ảo giác" và mất niềm tin là một chuỗi nhân quả có liên kết chặt chẽ. Dữ liệu huấn luyện thiếu tính đa dạng và toàn diện sẽ tạo ra thiên vị cho mô hình.14 Thiên vị này, cùng với các yếu tố khác như thiếu ngữ cảnh, có thể dẫn đến hiện tượng "ảo giác," tức là mô hình tạo ra thông tin không chính xác hoặc sai lệch.17 Khi những thông tin sai lệch này được cung cấp cho người dùng hoặc khách hàng, nó trực tiếp gây ra sự thất vọng và mất lòng tin, dẫn đến thiệt hại về uy tín và thậm chí là pháp lý.18 Vì vậy, việc giải quyết các vấn đề về dữ liệu ngay từ đầu là bước đầu tiên để ngăn chặn chuỗi rủi ro này.
+
+2.3. Rủi ro Pháp lý và Đạo đức
+
+Sở hữu Trí tuệ và Bản quyền: Sự phát triển của AI tạo sinh đặt ra một thách thức lớn về quyền sở hữu trí tuệ. Ai là tác giả của một tác phẩm do AI tạo ra?.23 Theo luật bản quyền hiện hành tại nhiều quốc gia, bao gồm cả Việt Nam và Hoa Kỳ, một tác phẩm được AI tạo ra hoàn toàn tự động, không có sự can thiệp sáng tạo của con người, có thể không đủ điều kiện để được bảo vệ bản quyền.23
+Rủi ro cho người dùng: Người dùng nội dung do AI tạo ra sẽ là bên chịu trách nhiệm pháp lý nếu nội dung đó vi phạm bản quyền.24 Các rủi ro phổ biến bao gồm việc AI được huấn luyện trên dữ liệu có bản quyền mà không xin phép hoặc vô tình tạo ra nội dung quá giống với tác phẩm gốc.26
+Các vụ kiện nổi bật:
+Getty Images vs. Stability AI: Getty Images đã kiện Stability AI vì cáo buộc sử dụng hơn 12 triệu bức ảnh có bản quyền của họ để huấn luyện mô hình Stable Diffusion.27 Vụ kiện này cũng nêu bật vấn đề mô hình AI có khả năng tái tạo hình mờ (watermark) của Getty Images, một dấu hiệu vi phạm nhãn hiệu.28
+Sarah Silverman vs. OpenAI: Nữ diễn viên hài Sarah Silverman và các tác giả khác kiện OpenAI với cáo buộc mô hình ChatGPT của họ được huấn luyện bằng các cuốn sách có bản quyền mà không xin phép.29
+Kết quả ban đầu: Các phán quyết ban đầu cho thấy một xu hướng pháp lý đang hình thành: Tòa án có thể bác bỏ các khiếu nại về vi phạm bản quyền trực tiếp vì khó chứng minh "sự tương đồng đáng kể" giữa đầu ra của AI và tác phẩm gốc.29 Tuy nhiên, các khiếu nại về "cạnh tranh không lành mạnh" hoặc vi phạm các quy định khác vẫn có thể tiến triển.29 Điều này cho thấy rủi ro không chỉ nằm ở sản phẩm cuối cùng mà còn ở toàn bộ quy trình và mục đích kinh doanh của các công ty AI.29
+Mất Niềm tin của Khách hàng: Niềm tin của khách hàng là yếu tố sống còn trong kinh doanh, và AI dễ dàng làm sụt giảm niềm tin này nếu không được quản lý cẩn thận.22
+Nguyên nhân mất niềm tin: AI có thể trả lời sai hoặc thiếu ngữ cảnh do dữ liệu huấn luyện không đủ hoặc chưa cập nhật.22 AI cũng có thể quá máy móc, thiếu cảm xúc và không thấu hiểu, khiến khách hàng cảm thấy như đang nói chuyện với một "cái máy lạnh lùng".22 Việc thiếu minh bạch, khi khách hàng không biết họ đang tương tác với AI hay con người, cũng làm giảm niềm tin ngay từ đầu.22
+Xây dựng lại niềm tin: Để xây dựng niềm tin cho AI, các tổ chức cần tập trung vào ba trụ cột: Chính xác (đào tạo trên dữ liệu thật và cập nhật thường xuyên), Minh bạch (công khai việc sử dụng AI), và Thấu hiểu (có kịch bản chuyển tiếp sang nhân viên con người khi AI không thể xử lý tình huống phức tạp).22
+
+Phần III: Các Dịch vụ AWS để Thực thi AI Có Trách nhiệm
+
+AWS cung cấp một bộ công cụ toàn diện tích hợp trong nền tảng SageMaker và các dịch vụ AI khác để giúp các tổ chức xây dựng và quản lý các hệ thống AI một cách có trách nhiệm.
+
+3.1. Amazon SageMaker Clarify
+
+Amazon SageMaker Clarify là một dịch vụ chuyên dụng để phát hiện thiên vị và giải thích các dự đoán của mô hình.31 Nó cung cấp các báo cáo trực quan và chỉ số khoa học để giúp nhà phát triển hiểu hành vi của mô hình.
+Chức năng: SageMaker Clarify hỗ trợ các nhà phát triển trong suốt vòng đời của mô hình học máy. Nó có thể phân tích dữ liệu huấn luyện để xác định sự mất cân bằng hoặc thiên vị tiềm ẩn liên quan đến các đặc điểm nhạy cảm như giới tính hoặc tuổi tác.31 Sau khi mô hình được huấn luyện, Clarify có thể kiểm tra xem mô hình có đưa ra kết quả bất lợi cho một nhóm nhân khẩu học nhất định thường xuyên hơn nhóm khác hay không.31 Hơn nữa, Clarify còn có khả năng giải thích các dự đoán của mô hình bằng cách cung cấp điểm số chi tiết về mức độ đóng góp của từng đặc điểm đầu vào vào một dự đoán cụ thể. Điều này đặc biệt hữu ích cho các mô hình bảng (tabular), xử lý ngôn ngữ tự nhiên (NLP) và thị giác máy tính, giúp nâng cao tính minh bạch của mô hình.31
+Lợi ích: Nâng cao độ tin cậy của mô hình, hỗ trợ các chương trình tuân thủ (compliance) bằng cách cung cấp các báo cáo có hệ thống, và giúp các bên liên quan dễ dàng hiểu được các quyết định của AI.31
+
+3.2. Amazon SageMaker Model Monitor
+
+Amazon SageMaker Model Monitor là dịch vụ tự động giám sát các mô hình học máy trong môi trường sản xuất. Nó phát hiện và cảnh báo về các vấn đề liên quan đến chất lượng dữ liệu đầu vào và độ lệch dữ liệu ("data drift") có thể làm giảm hiệu suất của mô hình theo thời gian.32
+Chức năng: Quá trình giám sát bắt đầu bằng việc tạo một "đường cơ sở" (baseline) từ dữ liệu huấn luyện ban đầu. Sau đó, Model Monitor thu thập dữ liệu thời gian thực được gửi đến endpoint và so sánh thống kê của dữ liệu này với đường cơ sở đã thiết lập. Nếu có sự thay đổi đáng kể về phân bố dữ liệu (ví dụ: giá trị trung bình, phương sai), Model Monitor sẽ phát hiện và cảnh báo.33 Dịch vụ này có thể được thiết lập để chạy liên tục theo một lịch trình định sẵn.32 Model Monitor cũng tích hợp với Amazon CloudWatch, cho phép người dùng thiết lập các bảng điều khiển và cảnh báo tự động khi phát hiện vi phạm, giúp các nhóm vận hành phản ứng nhanh chóng và chủ động.33
+Lợi ích: Duy trì hiệu suất mô hình trong môi trường sản xuất, tự động cảnh báo khi có vấn đề về chất lượng dữ liệu, và giảm thiểu lỗi do dữ liệu "trôi" gây ra.33
+
+3.3. Amazon Augmented AI (A2I)
+
+Amazon Augmented AI (A2I) cung cấp các luồng công việc "con người tham gia" (human-in-the-loop) để xem xét các dự đoán của AI.34 A2I giúp tự động hóa quá trình xem xét thủ công, chỉ gửi các dự đoán cần giám sát đến một đội ngũ con người.
+Chức năng: A2I hoạt động bằng cách thiết lập các điều kiện kích hoạt, ví dụ như gửi một dự đoán của mô hình đến con người để xem xét nếu độ tin cậy của nó thấp hơn một ngưỡng nhất định.35 Nó cũng có thể được sử dụng để gửi một mẫu ngẫu nhiên các dự đoán cho con người để kiểm tra chất lượng liên tục.35 Dịch vụ này đặc biệt hữu ích cho việc xử lý các trường hợp nhạy cảm hoặc phức tạp mà mô hình có thể gặp khó khăn, chẳng hạn như xác minh thông tin từ các tài liệu phức tạp hoặc các hình ảnh có nội dung mơ hồ.35
+Lợi ích: Giảm thiểu rủi ro từ các dự đoán sai của AI, nâng cao độ chính xác tổng thể của hệ thống, và cho phép các nhà phát triển xây dựng luồng công việc hiệu quả hơn bằng cách chỉ tập trung vào những trường hợp thực sự cần sự can thiệp của con người.35
+
+3.4. Guardrails for Amazon Bedrock
+
+Guardrails for Amazon Bedrock là một tính năng bảo vệ dành riêng cho các ứng dụng AI tạo sinh được xây dựng trên Amazon Bedrock.36 Nó hoạt động như một lớp lọc bổ sung, kiểm tra cả đầu vào của người dùng và đầu ra của mô hình để ngăn chặn nội dung độc hại hoặc không phù hợp.
+Chức năng: Guardrails cung cấp hai tính năng chính: Denied Topics (Chủ đề bị từ chối) và Content Filters (Bộ lọc nội dung).36 Với Denied Topics, người dùng có thể đặt ra các chủ đề bị cấm hoàn toàn, ví dụ như tư vấn tài chính hoặc y tế không được phép, bằng cách cung cấp tên và mô tả chi tiết cho chủ đề đó.36 Content Filters cho phép lọc nội dung trên bốn danh mục chính: thù hận, lăng mạ, tình dục và bạo lực. Mức độ lọc có thể được điều chỉnh từ "không" đến "cao", cho phép một mức độ linh hoạt phù hợp với chính sách của tổ chức.36 Guardrails cũng có thể được sử dụng để ngăn chặn các tấn công prompts (Prompt Attacks), bảo vệ mô hình khỏi các lệnh độc hại nhằm lách các biện pháp an toàn.37
+Lợi ích: Đảm bảo các ứng dụng AI tạo sinh tuân thủ các chính sách của công ty và mang lại trải nghiệm an toàn cho người dùng.36 Dịch vụ này hoạt động độc lập với mô hình nền tảng (foundational model - FM), cho phép áp dụng các biện pháp an toàn một cách nhất quán trên nhiều mô hình khác nhau.36
