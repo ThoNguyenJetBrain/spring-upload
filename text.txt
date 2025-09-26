@@ -106,3 +106,41 @@ Phân tích Chi phí-Lợi ích (Cost-benefit analyses): Việc xây dựng, tri
 Khi cần một kết quả cụ thể, không phải là dự đoán: Các mô hình ML đưa ra dự đoán dựa trên xác suất, chúng không bao giờ chắc chắn 100%. Nếu một quy trình kinh doanh yêu cầu một kết quả chính xác, tất định, thì không nên dùng ML.
 Ví dụ: Một hệ thống tính lương phải tính toán chính xác số tiền phải trả, không thể "dự đoán" mức lương.
 Khi không có đủ dữ liệu chất lượng: Các mô hình ML cần lượng lớn dữ liệu chất lượng cao để học. Nếu không có dữ liệu, hoặc dữ liệu bị nhiễu và thiên vị, mô hình sẽ hoạt động kém.
+Mục tiêu 1.2.3: Lựa chọn kỹ thuật ML phù hợp cho các trường hợp sử dụng cụ thể
+Đây là một trong những kỹ năng quan trọng nhất. Dưới đây là cách ánh xạ các loại vấn đề với các kỹ thuật ML:
+Câu hỏi kinh doanh
+Loại vấn đề ML
+Kỹ thuật ML
+Ví dụ
+"Đây là A hay B (hay C)?"
+Phân loại (Classification)
+Logistic Regression, Decision Tree, SVM
+Giao dịch này có gian lận không? Email này có phải là spam không?
+"Bao nhiêu/Bao nhiêu tiền?"
+Hồi quy (Regression)
+Linear Regression, Gradient Boosting
+Giá của ngôi nhà này sẽ là bao nhiêu? Chúng ta sẽ bán được bao nhiêu sản phẩm vào tháng tới?
+"Làm thế nào để tổ chức/nhóm những thứ này?"
+Phân cụm (Clustering)
+K-Means, DBSCAN
+Phân nhóm khách hàng dựa trên hành vi của họ.
+"Điều gì sẽ xảy ra tiếp theo?"
+Dự báo (Forecasting)
+ARIMA, LSTM
+Dự báo nhu cầu sản phẩm trong quý tới.
+
+Mục tiêu 1.2.4: Xác định các ví dụ về ứng dụng AI trong thế giới thực
+Thị giác máy tính (Computer Vision): Xe tự lái, nhận dạng khuôn mặt trên mạng xã hội, kiểm soát chất lượng sản phẩm trên dây chuyền sản xuất.
+Xử lý ngôn ngữ tự nhiên (NLP): Phân tích tình cảm (sentiment analysis) của các bài đánh giá sản phẩm, dịch máy, tóm tắt văn bản.
+Nhận dạng giọng nói (Speech Recognition): Chuyển đổi lời nói thành văn bản trong các trợ lý ảo (Siri, Alexa), tạo phụ đề tự động cho video.
+Hệ thống đề xuất (Recommendation Systems): Netflix đề xuất phim, Amazon đề xuất sản phẩm, Spotify đề xuất bài hát.
+Phát hiện gian lận (Fraud Detection): Các công ty thẻ tín dụng sử dụng ML để xác định các giao dịch đáng ngờ trong thời gian thực.
+Dự báo (Forecasting): Các nhà bán lẻ dự báo nhu cầu hàng tồn kho, các công ty năng lượng dự báo mức tiêu thụ điện.
+Mục tiêu 1.2.5: Giải thích khả năng của các dịch vụ AI/ML được quản lý của AWS
+AWS cung cấp các dịch vụ AI ở nhiều cấp độ khác nhau, từ các API dễ sử dụng đến các nền tảng xây dựng mô hình phức tạp.
+Amazon SageMaker: Một nền tảng toàn diện để xây dựng, huấn luyện và triển khai các mô hình ML trên quy mô lớn. Đây là công cụ dành cho các nhà khoa học dữ liệu và nhà phát triển ML.
+Amazon Transcribe: Dịch vụ nhận dạng giọng nói tự động (ASR) giúp chuyển đổi âm thanh thành văn bản.
+Amazon Translate: Dịch vụ dịch máy nơ-ron để dịch văn bản giữa các ngôn ngữ.
+Amazon Comprehend: Dịch vụ NLP giúp khám phá thông tin chi tiết và mối quan hệ trong văn bản, chẳng hạn như xác định thực thể, phân tích tình cảm, và trích xuất cụm từ chính.
+Amazon Lex: Dịch vụ để xây dựng các giao diện trò chuyện (chatbot) bằng giọng nói và văn bản. Đây là công nghệ đằng sau Alexa.
+Amazon Polly: Dịch vụ chuyển văn bản thành giọng nói (TTS) tự nhiên.
