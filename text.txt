@@ -16,3 +16,14 @@ Training: Là quá trình "dạy" cho mô hình bằng cách cung cấp dữ li�
 Inferencing: Là quá trình sử dụng mô hình đã được huấn luyện để đưa ra dự đoán trên dữ liệu mới, chưa từng thấy trước đây. Đây là giai đoạn triển khai mô hình vào thực tế.
 Thiên vị (Bias): Là xu hướng của mô hình đưa ra các dự đoán thiếu chính xác một cách có hệ thống cho một nhóm cụ thể. Điều này thường xảy ra khi dữ liệu huấn luyện không đại diện đầy đủ cho thực tế hoặc phản ánh những định kiến sẵn có của con người.
 Ví dụ: Một mô hình tuyển dụng được huấn luyện chủ yếu trên hồ sơ của nam giới có thể có xu hướng đánh giá thấp các ứng viên nữ.
+Công bằng (Fairness): Là nỗ lực để đảm bảo rằng các dự đoán của mô hình không bị ảnh hưởng tiêu cực bởi các đặc điểm nhạy cảm như giới tính, chủng tộc, hoặc tuổi tác. Đây là một mục tiêu quan trọng để xây dựng các hệ thống AI có trách nhiệm.
+Độ phù hợp (Fit): Mô tả mức độ mô hình khớp với dữ liệu.
+Underfitting (Dưới khớp): Mô hình quá đơn giản, không nắm bắt được các mẫu cơ bản trong dữ liệu, dẫn đến hiệu suất kém trên cả dữ liệu huấn luyện và dữ liệu mới.
+Overfitting (Quá khớp): Mô hình quá phức tạp, "học thuộc lòng" dữ liệu huấn luyện, bao gồm cả nhiễu. Nó hoạt động rất tốt trên dữ liệu đã thấy nhưng lại dự đoán rất tệ trên dữ liệu mới.
+Good Fit (Khớp tốt): Mô hình đủ phức tạp để nắm bắt các mẫu cơ bản nhưng không quá phức tạp đến mức học cả nhiễu. Đây là điểm cân bằng lý tưởng.
+Mô hình ngôn ngữ lớn (Large Language Model - LLM): Là một loại mô hình Deep Learning được huấn luyện trên một kho dữ liệu văn bản khổng lồ để hiểu và tạo ra ngôn ngữ tự nhiên. Ví dụ: GPT-4, LLaMA.
+Mục tiêu 1.1.2: Mô tả sự tương đồng và khác biệt giữa AI, ML, và Deep Learning
+Cách dễ nhất để hình dung mối quan hệ này là các vòng tròn đồng tâm: AI là vòng tròn lớn nhất, bên trong nó là ML, và bên trong ML là Deep Learning.
+AI (Trí tuệ nhân tạo): Khái niệm tổng quát về việc máy móc bắt chước trí thông minh của con người.
+ML (Học máy): Một cách tiếp cận cụ thể để đạt được AI, trong đó máy móc học từ dữ liệu.
+DL (Học sâu): Một kỹ thuật chuyên sâu trong ML, sử dụng các mạng nơ-ron phức tạp để học các mẫu tinh vi.
