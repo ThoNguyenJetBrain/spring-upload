@@ -1,0 +1,18 @@
+Hướng dẫn Ôn tập AWS Certified AI Practitioner - Domain 1: Fundamentals of AI and ML
+Tài liệu này cung cấp kiến thức tổng quan, chi tiết về các khái niệm cơ bản của Trí tuệ nhân tạo (AI) và Học máy (ML), bám sát các mục tiêu của Domain 1 trong kỳ thi AWS Certified AI Practitioner.
+Task Statement 1.1: Giải thích các khái niệm và thuật ngữ AI cơ bản
+Phần này tập trung vào việc định nghĩa và phân biệt các thuật ngữ nền tảng trong lĩnh vực AI và ML.
+Mục tiêu 1.1.1: Định nghĩa các thuật ngữ AI cơ bản
+Trí tuệ nhân tạo (Artificial Intelligence - AI): Là một lĩnh vực rộng lớn của khoa học máy tính, tập trung vào việc tạo ra các hệ thống máy tính có khả năng thực hiện các nhiệm vụ thường đòi hỏi trí thông minh của con người. Ví dụ: nhận dạng giọng nói, ra quyết định, dịch thuật. AI là khái niệm bao trùm tất cả.
+Học máy (Machine Learning - ML): Là một nhánh của AI, cung cấp cho máy tính khả năng "học" từ dữ liệu mà không cần lập trình tường minh. Thay vì viết các quy tắc cụ thể, chúng ta "huấn luyện" một thuật toán bằng cách cho nó xem rất nhiều ví dụ.
+Học sâu (Deep Learning): Là một lĩnh vực con của ML, sử dụng các mạng nơ-ron nhân tạo (neural networks) với nhiều lớp (do đó có từ "sâu") để học các mẫu phức tạp từ lượng lớn dữ liệu. Deep Learning là động lực đằng sau những đột phá gần đây trong nhận dạng hình ảnh và xử lý ngôn ngữ.
+Mạng nơ-ron (Neural Networks): Lấy cảm hứng từ bộ não con người, đây là một hệ thống các "nơ-ron" nhân tạo được kết nối với nhau. Mỗi kết nối có thể truyền tín hiệu từ nơ-ron này sang nơ-ron khác, và mạng lưới này học bằng cách điều chỉnh sức mạnh (trọng số) của các kết nối đó.
+Thị giác máy tính (Computer Vision): Một lĩnh vực của AI giúp máy tính "nhìn" và hiểu thông tin hình ảnh và video. Ví dụ: Mở khóa điện thoại bằng khuôn mặt, xe tự lái nhận diện biển báo giao thông.
+Xử lý ngôn ngữ tự nhiên (Natural Language Processing - NLP): Cho phép máy tính hiểu, diễn giải và tạo ra ngôn ngữ của con người. Ví dụ: Trợ lý ảo như Alexa, Google Translate, chatbot dịch vụ khách hàng.
+Mô hình (Model): Là kết quả đầu ra của quá trình huấn luyện ML. Về cơ bản, nó là một tập hợp các quy tắc và mẫu được thuật toán học từ dữ liệu. Bạn cung cấp dữ liệu đầu vào cho mô hình, và nó sẽ đưa ra một dự đoán hoặc quyết định.
+Thuật toán (Algorithm): Là quy trình hoặc công thức mà một hệ thống ML sử dụng để học từ dữ liệu và tạo ra một mô hình. Ví dụ: thuật toán hồi quy tuyến tính (Linear Regression), cây quyết định (Decision Tree).
+Huấn luyện (Training) và Suy luận (Inferencing):
+Training: Là quá trình "dạy" cho mô hình bằng cách cung cấp dữ liệu đã được gán nhãn. Trong quá trình này, thuật toán điều chỉnh các tham số nội bộ của nó để tìm ra các mẫu.
+Inferencing: Là quá trình sử dụng mô hình đã được huấn luyện để đưa ra dự đoán trên dữ liệu mới, chưa từng thấy trước đây. Đây là giai đoạn triển khai mô hình vào thực tế.
+Thiên vị (Bias): Là xu hướng của mô hình đưa ra các dự đoán thiếu chính xác một cách có hệ thống cho một nhóm cụ thể. Điều này thường xảy ra khi dữ liệu huấn luyện không đại diện đầy đủ cho thực tế hoặc phản ánh những định kiến sẵn có của con người.
+Ví dụ: Một mô hình tuyển dụng được huấn luyện chủ yếu trên hồ sơ của nam giới có thể có xu hướng đánh giá thấp các ứng viên nữ.
