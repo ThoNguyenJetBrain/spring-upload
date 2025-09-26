@@ -27,3 +27,45 @@ Cách dễ nhất để hình dung mối quan hệ này là các vòng tròn đ�
 AI (Trí tuệ nhân tạo): Khái niệm tổng quát về việc máy móc bắt chước trí thông minh của con người.
 ML (Học máy): Một cách tiếp cận cụ thể để đạt được AI, trong đó máy móc học từ dữ liệu.
 DL (Học sâu): Một kỹ thuật chuyên sâu trong ML, sử dụng các mạng nơ-ron phức tạp để học các mẫu tinh vi.
+
+Đặc điểm
+Trí tuệ nhân tạo (AI)
+Học máy (ML)
+Học sâu (DL)
+Phạm vi
+Rộng nhất, bao gồm tất cả
+Nhánh của AI
+Lĩnh vực con của ML
+Mục tiêu
+Mô phỏng trí thông minh của con người
+Học từ dữ liệu để dự đoán
+Tự động học các đặc trưng phức tạp
+Phương pháp
+Logic, quy tắc, học máy,...
+Thuật toán thống kê
+Mạng nơ-ron sâu (nhiều lớp)
+Yêu cầu dữ liệu
+Có thể không cần dữ liệu (hệ chuyên gia)
+Cần dữ liệu
+Cần lượng dữ liệu rất lớn
+Ví dụ
+Robot chơi cờ, hệ chuyên gia
+Dự đoán giá nhà, phân loại email
+Xe tự lái, nhận dạng khuôn mặt
+
+Mục tiêu 1.1.3: Mô tả các loại suy luận (Inferencing)
+Suy luận theo lô (Batch Inferencing): Xử lý một lượng lớn dữ liệu đầu vào cùng một lúc và tạo ra các dự đoán. Quá trình này không diễn ra theo thời gian thực và thường được lên lịch để chạy định kỳ (ví dụ: hàng đêm).
+Ví dụ: Một ngân hàng xử lý tất cả các giao dịch trong ngày vào cuối ngày để phát hiện gian lận.
+Suy luận thời gian thực (Real-time Inferencing): Tạo ra dự đoán gần như ngay lập tức khi nhận được dữ liệu đầu vào. Yêu cầu độ trễ thấp.
+Ví dụ: Một ứng dụng dịch thuật dịch lời nói của bạn ngay khi bạn đang nói, hoặc một hệ thống đề xuất sản phẩm cập nhật ngay khi bạn duyệt web.
+Mục tiêu 1.1.4: Mô tả các loại dữ liệu trong mô hình AI
+Dữ liệu có nhãn (Labeled Data) và không có nhãn (Unlabeled Data):
+Labeled Data: Dữ liệu đã được gán một "câu trả lời" hoặc "nhãn" đúng. Cần thiết cho học có giám sát. Ví dụ: một bộ sưu tập ảnh động vật, trong đó mỗi ảnh được gắn nhãn "chó" hoặc "mèo".
+Unlabeled Data: Dữ liệu thô, không có câu trả lời định trước. Được sử dụng trong học không giám sát. Ví dụ: một bộ sưu tập ảnh động vật chưa được phân loại.
+Dữ liệu dạng bảng (Tabular Data): Dữ liệu được tổ chức dưới dạng hàng và cột, giống như trong bảng tính hoặc cơ sở dữ liệu. Đây là loại dữ liệu phổ biến nhất.
+Dữ liệu chuỗi thời gian (Time-series Data): Một chuỗi các điểm dữ liệu được sắp xếp theo thứ tự thời gian. Ví dụ: giá cổ phiếu hàng ngày, dữ liệu thời tiết hàng giờ.
+Dữ liệu hình ảnh (Image Data): Bao gồm ảnh, video.
+Dữ liệu văn bản (Text Data): Bao gồm email, tài liệu, tweet, v.v.
+Dữ liệu có cấu trúc (Structured Data) và phi cấu trúc (Unstructured Data):
+Structured Data: Dữ liệu có một mô hình hoặc cấu trúc được xác định trước, dễ dàng tổ chức trong bảng. Ví dụ: dữ liệu dạng bảng.
+Unstructured Data: Dữ liệu không có cấu trúc tổ chức rõ ràng. Ví dụ: văn bản, hình ảnh, âm thanh. Hơn 80% dữ liệu trên thế giới là phi cấu trúc.
