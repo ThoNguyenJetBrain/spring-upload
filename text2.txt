@@ -1,0 +1,72 @@
+Bảng so sánh sau đây làm nổi bật sự khác biệt và chức năng của từng dịch vụ AWS AI:
+Dịch vụ
+Mục đích chính
+Đối tượng người dùng
+Mức độ kỹ thuật
+Lợi ích cốt lõi
+Amazon SageMaker JumpStart
+Tăng tốc hành trình ML, triển khai mô hình có sẵn
+Nhà khoa học dữ liệu, kỹ sư ML
+Chuyên nghiệp (Pro-code)
+Tùy chỉnh mô hình, an toàn dữ liệu trong VPC
+Amazon Bedrock
+Xây dựng và mở rộng ứng dụng AI tạo sinh
+Nhà phát triển, doanh nghiệp
+Thấp đến cao (Low-code/Pro-code)
+Lựa chọn mô hình đa dạng, bảo vệ tích hợp
+PartyRock
+Môi trường học tập và thử nghiệm AI tạo sinh
+Mọi người, người mới bắt đầu
+Không cần mã (No-code)
+Rào cản gia nhập thấp, học prompt engineering
+Amazon Q
+Trợ lý AI cho doanh nghiệp
+Nhân viên doanh nghiệp, nhà phát triển
+Không cần mã đến tùy chỉnh (No-code/Custom)
+Tăng năng suất, thông tin thống nhất, an toàn
+
+
+3.2. Lợi Ích của Việc Sử Dụng Các Dịch Vụ AI Tạo Sinh của AWS
+
+Việc xây dựng các ứng dụng AI tạo sinh trên nền tảng AWS mang lại nhiều lợi thế cạnh tranh [1, 4]:
+Khả năng tiếp cận và Rào cản gia nhập thấp: Các dịch vụ được quản lý toàn phần như Bedrock và PartyRock giúp người dùng và doanh nghiệp dễ dàng bắt đầu với AI tạo sinh mà không cần đầu tư lớn vào cơ sở hạ tầng hoặc đội ngũ chuyên gia [1, 12].
+Hiệu quả và Tốc độ ra thị trường: AWS giúp doanh nghiệp tập trung vào việc phát triển ứng dụng thay vì quản lý cơ sở hạ tầng phức tạp, từ đó tăng tốc độ đưa sản phẩm ra thị trường [34].
+Khả năng đáp ứng mục tiêu kinh doanh: Bằng cách cung cấp một loạt các mô hình và công cụ, AWS cho phép doanh nghiệp tùy chỉnh giải pháp để giải quyết các vấn đề kinh doanh cụ thể, từ đó tạo ra giá trị kinh doanh thực sự [36].
+
+3.3. Lợi Ích của Cơ Sở Hạ Tầng AWS cho Ứng Dụng AI Tạo Sinh
+
+Các dịch vụ AI tạo sinh của AWS chỉ có thể hoạt động hiệu quả nhờ vào sức mạnh của cơ sở hạ tầng toàn cầu AWS [37]. Nền tảng hạ tầng này cung cấp:
+Bảo mật, Tuân thủ và An toàn: AWS tích hợp bảo mật từ lớp hạ tầng cốt lõi [37]. Mọi lưu lượng dữ liệu trên mạng toàn cầu của AWS đều được mã hóa tự động [37]. AWS cũng cung cấp các công cụ như Bedrock Guardrails [15] và tuân thủ các tiêu chuẩn quốc tế như ISO, SOC, GDPR và HIPAA [15], trực tiếp giải quyết các lo ngại về bảo mật và trách nhiệm đã được đề cập [1, 38].
+Hiệu năng và Khả năng mở rộng quy mô (Performance & Scalability): Hạ tầng của AWS được xây dựng để đạt hiệu năng cao, với độ trễ thấp và tỷ lệ mất gói thấp [37]. Khả năng mở rộng linh hoạt của đám mây cho phép doanh nghiệp điều chỉnh tài nguyên theo nhu cầu, tránh lãng phí [37].
+
+3.4. Cân Bằng Chi Phí (Cost Tradeoffs) của Dịch Vụ AWS
+
+Việc lựa chọn mô hình định giá phù hợp là một quyết định chiến lược, đòi hỏi sự cân bằng giữa chi phí, hiệu suất và tính linh hoạt [39]. AWS cung cấp hai mô hình định giá chính cho AI tạo sinh:
+Mô hình định giá dựa trên Tokens (On-Demand Pricing):
+Khái niệm: Thanh toán theo mức sử dụng thực tế, tính phí trên mỗi token đầu vào và đầu ra [8, 39]. Một token là đơn vị văn bản cơ bản mà mô hình xử lý [39].
+Ưu điểm: Linh hoạt, không cần cam kết trả trước [8]. Lý tưởng cho các khối lượng công việc thử nghiệm hoặc không thể đoán trước.
+Thực tế: Có một mối liên kết trực tiếp giữa kỹ năng prompt engineering và chi phí. Bằng cách tối ưu hóa câu lệnh để giảm số lượng token, người dùng có thể tiết kiệm đáng kể chi phí [8]. Điều này làm cho prompt engineering không chỉ là một kỹ năng kỹ thuật mà còn là một kỹ năng quản lý chi phí [8].
+Mô hình Thông lượng được cung cấp (Provisioned Throughput):
+Khái niệm: Mua trước một dung lượng nhất định dưới dạng các đơn vị mô hình [39, 40]. Tính phí theo giờ, với các tùy chọn cam kết 1 hoặc 6 tháng [39, 40].
+Ưu điểm: Đảm bảo hiệu suất và độ sẵn sàng cho các khối lượng công việc lớn, ổn định [8].
+Nhược điểm: Yêu cầu cam kết, kém linh hoạt hơn so với on-demand [8].
+Tiêu chí
+Định giá theo Tokens (On-Demand)
+Thông lượng được cung cấp (Provisioned Throughput)
+Cách tính phí
+Trên mỗi token đầu vào và đầu ra
+Theo giờ cho mỗi đơn vị mô hình
+Tính linh hoạt
+Rất cao, không có cam kết
+Thấp, yêu cầu cam kết 1 hoặc 6 tháng
+Trường hợp sử dụng
+Thử nghiệm, khối lượng công việc không ổn định
+Khối lượng công việc lớn, ổn định, cần thông lượng đảm bảo
+
+
+Kết Luận
+
+Qua việc phân tích chuyên sâu các nguyên lý, khả năng, và công nghệ liên quan đến AI tạo sinh, tài liệu này đã cung cấp một lộ trình học tập toàn diện cho Domain 2 của kỳ thi chứng chỉ AWS Certified AI Practitioner. Các khái niệm cốt lõi như tokens, embeddings, và kiến trúc Transformer tạo thành nền tảng kỹ thuật cho toàn bộ lĩnh vực này, trong khi prompt engineering nổi lên như một kỹ năng then chốt để điều khiển các mô hình.
+Báo cáo này cũng nhấn mạnh rằng việc triển khai AI tạo sinh không chỉ là một vấn đề kỹ thuật mà còn là một quyết định kinh doanh chiến lược. Các doanh nghiệp cần hiểu rõ cả ưu điểm (tính thích ứng, năng suất) và nhược điểm (ảo giác, thiếu diễn giải) để đưa ra các quyết định sáng suốt. Giá trị của AI tạo sinh cần được đo lường bằng các chỉ số kinh doanh cụ thể, không chỉ là hiệu suất mô hình.
+Cuối cùng, AWS đã định vị mình là một đối tác đáng tin cậy bằng cách cung cấp một hệ sinh thái dịch vụ hoàn chỉnh (Bedrock, SageMaker JumpStart, PartyRock, Amazon Q) được xây dựng trên một cơ sở hạ tầng toàn cầu mạnh mẽ, đảm bảo bảo mật, tuân thủ và khả năng mở rộng quy mô. Sự hiểu biết về các mô hình định giá khác nhau của AWS (dựa trên token và thông lượng được cung cấp) là yếu tố then chốt để quản lý chi phí hiệu quả và đưa các ứng dụng AI tạo sinh vào sản xuất một cách bền vững.
+
