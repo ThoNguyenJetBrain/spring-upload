@@ -69,3 +69,40 @@ Dữ liệu văn bản (Text Data): Bao gồm email, tài liệu, tweet, v.v.
 Dữ liệu có cấu trúc (Structured Data) và phi cấu trúc (Unstructured Data):
 Structured Data: Dữ liệu có một mô hình hoặc cấu trúc được xác định trước, dễ dàng tổ chức trong bảng. Ví dụ: dữ liệu dạng bảng.
 Unstructured Data: Dữ liệu không có cấu trúc tổ chức rõ ràng. Ví dụ: văn bản, hình ảnh, âm thanh. Hơn 80% dữ liệu trên thế giới là phi cấu trúc.
+
+Mục tiêu 1.1.5: Mô tả học có giám sát, không giám sát và học tăng cường
+Loại học
+Mô tả
+Loại dữ liệu
+Mục tiêu
+Ví dụ
+Học có giám sát (Supervised Learning)
+Học từ dữ liệu đã được gán nhãn để dự đoán kết quả cho dữ liệu mới. Giống như học với một người thầy.
+Có nhãn
+Dự đoán nhãn hoặc một giá trị liên tục.
+Phân loại email là spam hay không. Dự đoán giá nhà.
+Học không giám sát (Unsupervised Learning)
+Học từ dữ liệu không có nhãn để khám phá các mẫu hoặc cấu trúc tiềm ẩn.
+Không có nhãn
+Tìm các cụm (clusters) hoặc các mối liên hệ.
+Phân nhóm khách hàng dựa trên hành vi mua sắm.
+Học tăng cường (Reinforcement Learning)
+Một "tác nhân" học cách hành động trong một "môi trường" để tối đa hóa phần thưởng. Học thông qua thử và sai.
+Không cần dữ liệu ban đầu
+Học một chuỗi các quyết định tối ưu (chính sách).
+Huấn luyện một AI chơi game. Robot tự học cách đi.
+
+Task Statement 1.2: Xác định các trường hợp sử dụng AI trong thực tế
+Phần này khám phá cách áp dụng AI/ML để giải quyết các vấn đề trong thế giới thực và khi nào nên hoặc không nên sử dụng chúng.
+Mục tiêu 1.2.1: Nhận biết các ứng dụng mà AI/ML có thể mang lại giá trị
+Hỗ trợ ra quyết định của con người: AI có thể phân tích lượng lớn dữ liệu để cung cấp thông tin chi tiết, giúp con người đưa ra quyết định tốt hơn và nhanh hơn.
+Ví dụ: Một hệ thống AI phân tích hình ảnh y tế để đánh dấu các khu vực đáng ngờ cho bác sĩ X-quang xem xét.
+Khả năng mở rộng giải pháp (Solution Scalability): AI có thể tự động hóa các tác vụ lặp đi lặp lại trên quy mô lớn mà con người không thể thực hiện hiệu quả.
+Ví dụ: Một công ty thương mại điện tử sử dụng chatbot để xử lý hàng nghìn yêu cầu của khách hàng cùng một lúc.
+Tự động hóa (Automation): Tự động hóa các quy trình thủ công để giảm chi phí, tăng hiệu quả và giảm lỗi do con người.
+Ví dụ: Tự động phân loại và định tuyến các email hỗ trợ đến đúng bộ phận.
+Mục tiêu 1.2.2: Xác định khi nào giải pháp AI/ML không phù hợp
+Phân tích Chi phí-Lợi ích (Cost-benefit analyses): Việc xây dựng, triển khai và bảo trì một hệ thống ML có thể tốn kém. Nếu một giải pháp đơn giản hơn (như một bộ quy tắc) có thể giải quyết vấn đề với chi phí thấp hơn, thì AI/ML có thể không phải là lựa chọn tốt nhất.
+Khi cần một kết quả cụ thể, không phải là dự đoán: Các mô hình ML đưa ra dự đoán dựa trên xác suất, chúng không bao giờ chắc chắn 100%. Nếu một quy trình kinh doanh yêu cầu một kết quả chính xác, tất định, thì không nên dùng ML.
+Ví dụ: Một hệ thống tính lương phải tính toán chính xác số tiền phải trả, không thể "dự đoán" mức lương.
+Khi không có đủ dữ liệu chất lượng: Các mô hình ML cần lượng lớn dữ liệu chất lượng cao để học. Nếu không có dữ liệu, hoặc dữ liệu bị nhiễu và thiên vị, mô hình sẽ hoạt động kém.
