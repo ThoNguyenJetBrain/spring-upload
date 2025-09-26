@@ -109,3 +109,99 @@ hybrid search (kết hợp tìm kiếm từ khóa và vector), multi-modal searc
 Amazon Aurora và Amazon RDS for PostgreSQL: Các dịch vụ cơ sở dữ liệu quan hệ này hỗ trợ vector search thông qua extension mã nguồn mở pgvector.15 Điều này cho phép các nhà phát triển lưu trữ dữ liệu quan hệ truyền thống và vector embeddings trong cùng một cơ sở dữ liệu, tận dụng các công cụ và quy trình làm việc quen thuộc mà không cần quản lý một hệ thống riêng biệt.16
 Amazon DocumentDB (với tính tương thích MongoDB): Dịch vụ cơ sở dữ liệu tài liệu này kết hợp sự linh hoạt của dữ liệu JSON với sức mạnh của vector search.18
 Amazon Neptune: Là một dịch vụ cơ sở dữ liệu đồ thị, Amazon Neptune hỗ trợ Neptune Analytics để lưu trữ embeddings và thực hiện tìm kiếm hiệu quả trên dữ liệu đồ thị.13
+Chiến lược của AWS là tích hợp khả năng vector search vào các dịch vụ cơ sở dữ liệu hiện có.17 Điều này mang lại lợi ích lớn cho nhà phát triển, vì họ có thể sử dụng các công cụ và quy trình quen thuộc để xây dựng các ứng dụng AI tạo sinh, giảm thiểu việc phải học và quản lý các công nghệ mới.17 Cách tiếp cận này cũng cho phép lưu trữ và xử lý dữ liệu vector cùng với dữ liệu truyền thống trong cùng một hệ thống, đơn giản hóa kiến trúc ứng dụng.
+
+Đánh đổi chi phí trong tùy chỉnh mô hình
+
+Việc tùy chỉnh một mô hình nền tảng có thể được thực hiện theo nhiều cách, mỗi cách có một sự đánh đổi khác nhau về chi phí, thời gian và độ phức tạp.
+Pre-training (Đắt nhất): Đây là phương pháp tốn kém nhất về chi phí ($$$$), thời gian (months), và tài nguyên tính toán (serious GPU infrastructure). Phương pháp này chỉ dành cho các tổ chức muốn có toàn quyền kiểm soát mô hình và tạo ra các khả năng hoàn toàn mới.19 Chi phí để đào tạo các mô hình tiên tiến có thể lên tới hàng chục, thậm chí hàng trăm triệu đô la.19
+Fine-tuning (Vừa phải): Fine-tuning nhanh hơn và rẻ hơn đáng kể so với pre-training ($$ / medium). Phương pháp này phù hợp để tùy chỉnh một mô hình đã có cho một tác vụ hoặc miền cụ thể bằng cách sử dụng một tập dữ liệu nhỏ hơn, đã được gắn nhãn (labeled data).20 Tuy nhiên, fine-tuning vẫn có thể đòi hỏi tài nguyên GPU đáng kể.19
+RAG (Rẻ nhất): Retrieval Augmented Generation (RAG) là cách tiếp cận nhanh nhất và hiệu quả chi phí nhất ($ / short) để tùy chỉnh mô hình.19 Nó không thay đổi các trọng số của mô hình mà chỉ cung cấp ngữ cảnh bổ sung từ một nguồn bên ngoài tại thời điểm suy luận.19 Điều này giúp mô hình truy cập thông tin cập nhật mà không cần tốn thời gian và tài nguyên để đào tạo lại.19
+In-context Learning: Đây là một phương pháp nhanh chóng và không yêu cầu đào tạo lại mô hình. Nó bao gồm việc cung cấp ví dụ và hướng dẫn trong chính prompt, và có thể được coi là một phần của quy trình RAG.11 Phương pháp này bị giới hạn bởi độ dài context window của mô hình.22
+Bảng sau đây tóm tắt sự đánh đổi giữa các phương pháp:
+Phương pháp
+Mục tiêu chính
+Loại dữ liệu
+Chi phí/Thời gian
+Độ phức tạp
+Pre-training
+Tạo ra các khả năng mới, kiểm soát hoàn toàn
+Lớn, đa dạng, không gắn nhãn
+Rất cao/Rất lâu
+Rất cao
+Fine-tuning
+Tối ưu hóa cho tác vụ/miền cụ thể
+Nhỏ hơn, có gắn nhãn, chuyên biệt
+Vừa phải/Trung bình
+Cao
+RAG
+Tích hợp kiến thức độc quyền/cập nhật
+Dữ liệu bên ngoài (không gắn nhãn)
+Thấp/Rất nhanh
+Trung bình
+In-context Learning
+Hướng dẫn hành vi trong prompt
+Ví dụ trong prompt
+Rất thấp/Tức thời
+Thấp
+
+
+Vai trò của Agents trong các tác vụ đa bước
+
+Agents là các ứng dụng AI tạo sinh có khả năng tự động hóa các tác vụ phức tạp, nhiều bước bằng cách sử dụng khả năng suy luận của mô hình nền tảng, API, và các nguồn dữ liệu.23 Thay vì chỉ trả lời một câu hỏi, một agent có thể phân tích một yêu cầu của người dùng, chia nhỏ nó thành một chuỗi các bước logic, gọi các API cần thiết để thực hiện các hành động trong các hệ thống bên ngoài, và thu thập thông tin để hoàn thành nhiệm vụ.23
+Amazon Bedrock Agents là một dịch vụ được thiết kế để đơn giản hóa quá trình xây dựng, triển khai và quản lý các tác vụ này.23 Các tính năng chính bao gồm:
+Multi-agent Collaboration (Hợp tác đa agent): Cho phép nhiều agent chuyên biệt cùng làm việc trên một tác vụ phức tạp. Một supervisor agent (agent giám sát) sẽ nhận yêu cầu, phân chia công việc cho các subagents (agent con) phù hợp với lĩnh vực chuyên môn của chúng, và sau đó tổng hợp kết quả để đưa ra câu trả lời cuối cùng.24 Điều này giúp đạt được tỷ lệ thành công và độ chính xác cao hơn cho các tác vụ phức tạp, ví dụ như quản lý chiến dịch marketing trên mạng xã hội.24
+Memory Retention (Ghi nhớ): Agents có khả năng ghi nhớ các tương tác trong quá khứ, mang lại trải nghiệm người dùng liền mạch và cá nhân hóa hơn cho các tác vụ nhiều bước.23
+Code Interpretation (Diễn giải mã): Cho phép agent tự động tạo và thực thi mã trong một môi trường an toàn. Tính năng này giúp giải quyết các yêu cầu phân tích dữ liệu phức tạp, trực quan hóa dữ liệu hoặc giải quyết các bài toán toán học mà trước đây rất khó để thực hiện chỉ bằng khả năng suy luận của mô hình.23
+
+Phần 2: Kỹ thuật Prompt Engineering Hiệu quả (Domain 3.2)
+
+
+Các Khái niệm và Cấu trúc cơ bản
+
+Prompt engineering là quá trình tạo ra các prompt (đầu vào văn bản) được thiết kế cẩn thận để hướng dẫn các mô hình nền tảng tạo ra đầu ra mong muốn.11 Quá trình này được coi là cả một nghệ thuật và một khoa học, yêu cầu sự hiểu biết sâu sắc về khả năng và hạn chế của mô hình.11 Một prompt hiệu quả thường bao gồm các thành phần chính sau:
+Instruction (Hướng dẫn): Đây là các chỉ dẫn rõ ràng và cụ thể về nhiệm vụ cần thực hiện.11 Ví dụ: "Tóm tắt tài liệu sau," hoặc "Viết một email với giọng điệu trang trọng."
+Context (Ngữ cảnh): Cung cấp thông tin nền tảng hoặc dữ liệu mà mô hình cần dựa vào để tạo câu trả lời.11 Đây là cốt lõi của RAG và in-context learning, nơi dữ liệu riêng của công ty được đưa vào prompt.13
+Negative Prompts (Prompt phủ định): Chỉ định nội dung hoặc phong cách mà mô hình nên tránh.25 Ví dụ: "không bao gồm từ 'bắt buộc'."
+Một khái niệm quan trọng khác là model latent space (không gian tiềm ẩn của mô hình), một biểu diễn toán học trừu tượng của tri thức mà mô hình đã học được. Prompt engineering hoạt động bằng cách điều hướng mô hình đến một khu vực cụ thể trong không gian này để tạo ra câu trả lời phù hợp với yêu cầu.
+
+Các Kỹ thuật Prompt Engineering nâng cao
+
+Các kỹ thuật nâng cao giúp vượt qua những hạn chế của các prompt đơn giản và tận dụng tối đa khả năng của mô hình.
+Zero-shot Prompting: Đây là kỹ thuật cơ bản nhất, trong đó prompt không bao gồm bất kỳ ví dụ nào về đầu ra mong muốn.12 Kỹ thuật này dựa vào kiến thức có sẵn của mô hình từ giai đoạn đào tạo sơ bộ để tạo ra phản hồi.12
+Few-shot Prompting: Kỹ thuật này cung cấp một vài ví dụ về cặp input-output ngay trong prompt.11 Các ví dụ này hoạt động như một "hướng dẫn đào tạo" nhỏ, giúp mô hình hiểu rõ hơn về nhiệm vụ và định dạng đầu ra mong muốn.12 Kỹ thuật này hiệu quả hơn zero-shot cho các tác vụ cụ thể và phức tạp hơn.
+Chain-of-Thought (CoT) Prompting: CoT là một kỹ thuật mạnh mẽ cải thiện khả năng suy luận của mô hình bằng cách yêu cầu nó hiển thị các bước giải quyết vấn đề một cách tuần tự trước khi đưa ra câu trả lời cuối cùng.11 Bằng cách này, mô hình sẽ "tư duy từng bước," làm cho quá trình suy luận trở nên minh bạch và có thể diễn giải được hơn.11 Một ví dụ thực tế cho thấy một prompt few-shot CoT có thể hướng dẫn mô hình giải một bài toán toán học phức tạp một cách chính xác hơn, bằng cách yêu cầu nó hiển thị từng phép tính một.11 Kỹ thuật này được chứng minh là vượt trội hơn few-shot thông thường, đặc biệt trong các bài toán đòi hỏi suy luận phức tạp.12
+
+Lợi ích và Best Practices
+
+Prompt engineering mang lại nhiều lợi ích quan trọng cho việc phát triển ứng dụng AI tạo sinh:
+Cải thiện chất lượng và độ chính xác: Bằng cách cung cấp hướng dẫn và ngữ cảnh rõ ràng, prompt engineering giúp định hình phản hồi, làm cho đầu ra của mô hình trở nên phù hợp và chính xác hơn với mục tiêu.11
+Thử nghiệm và tối ưu hóa: Quá trình tinh chỉnh prompt là một chu kỳ lặp lại, cho phép các nhà phát triển liên tục thử nghiệm và điều chỉnh để tối ưu hóa hiệu suất của ứng dụng.28
+Sử dụng Guardrails: Một best practice quan trọng là sử dụng các rào chắn an toàn (guardrails) để áp dụng các chính sách an toàn, lọc nội dung độc hại hoặc nhạy cảm ở cả đầu vào và đầu ra.11 Guardrails for Amazon Bedrock giúp ngăn chặn các prompt không phù hợp trước khi chúng đến được mô hình và lọc các phản hồi không mong muốn trước khi chúng được trả về cho người dùng.3
+
+Rủi ro và Hạn chế Tiềm ẩn
+
+Mặc dù mạnh mẽ, prompt engineering và các ứng dụng LLM cũng tiềm ẩn nhiều rủi ro an ninh nghiêm trọng.
+Exposure (Lộ thông tin): Rủi ro này xảy ra khi người dùng vô tình đưa dữ liệu nhạy cảm hoặc độc quyền vào prompt, và thông tin này có thể bị lộ trong các phản hồi sau đó.22
+Poisoning (Đầu độc dữ liệu): Đây là một cuộc tấn công vào tính toàn vẹn của mô hình, trong đó kẻ tấn công đưa dữ liệu xấu vào tập dữ liệu đào tạo hoặc fine-tuning để tạo ra các lỗ hổng, cửa hậu (backdoors), hoặc thiên kiến.29 Mục tiêu là làm suy giảm hiệu suất của mô hình, khiến nó tạo ra các đầu ra sai lệch hoặc độc hại.29 Một ví dụ là việc một kẻ tấn công chèn các tài liệu giả mạo vào dữ liệu đào tạo, dẫn đến việc mô hình tạo ra các phản hồi không chính xác.29
+Hijacking (Chiếm quyền điều khiển): LLM Hijacking là một cuộc tấn công ở cấp độ cơ sở hạ tầng, nơi kẻ tấn công chiếm đoạt thông tin xác thực đám mây (stolen cloud credentials) để truy cập và sử dụng dịch vụ LLM trái phép.31 Điều này có thể dẫn đến chi phí sử dụng dịch vụ lên tới hàng chục nghìn đô la mỗi ngày và rủi ro đánh cắp dữ liệu nhạy cảm của doanh nghiệp.31 Cuộc tấn công này nhấn mạnh rằng bảo mật cho các ứng dụng LLM không chỉ giới hạn ở cấp độ tương tác người dùng mà còn phải bao gồm bảo mật hạ tầng đám mây.
+Jailbreaking (Vượt rào an toàn): Jailbreaking là một hình thức tấn công social engineering (kỹ thuật xã hội) nhằm vượt qua các rào chắn an toàn và đạo đức được tích hợp trong mô hình.33 Các kỹ thuật jailbreaking thường sử dụng các prompt được tạo ra một cách tinh vi để lừa mô hình, ví dụ như thuyết phục mô hình rằng nó đang ở trong một "chế độ bảo trì đặc biệt" nơi các hạn chế an toàn đã bị vô hiệu hóa.33
+Sự kết nối giữa các loại rủi ro này cho thấy một chiến lược an toàn toàn diện là cần thiết. Mặc dù các công cụ bảo vệ model như Amazon Bedrock Guardrails có thể ngăn chặn các cuộc tấn công jailbreaking 11, chúng không thể bảo vệ khỏi một cuộc tấn công hijacking ở cấp độ hạ tầng.31 Một tổ chức có thể có các guardrails mạnh mẽ, nhưng nếu thông tin đăng nhập AWS của họ bị đánh cắp, kẻ tấn công vẫn có thể chiếm quyền điều khiển LLM và gây ra thiệt hại đáng kể.31 Do đó, việc áp dụng các biện pháp bảo mật đám mây truyền thống như quản lý danh tính và quyền truy cập (IAM) chặt chẽ, quản lý bí mật (secrets management), và nguyên tắc đặc quyền tối thiểu (least privilege) là vô cùng quan trọng để bảo vệ tài khoản và dịch vụ của mình.32
+
+Phần 3: Quy trình Training và Fine-tuning (Domain 3.3)
+
+
+Các Yếu tố Chính của Quy trình Đào tạo
+
+Quy trình đào tạo một mô hình nền tảng bao gồm một số giai đoạn chính, mỗi giai đoạn có một mục tiêu riêng.
+Pre-training (Đào tạo sơ bộ): Đây là giai đoạn đầu tiên, trong đó một mô hình được đào tạo trên một lượng dữ liệu tổng quát, không gắn nhãn (unlabeled data) khổng lồ.35 Mục tiêu là giúp mô hình học các quy tắc cơ bản về ngữ pháp, cấu trúc ngôn ngữ và kiến thức phổ quát, tạo ra một nền tảng vững chắc cho các tác vụ sau này.35
+Fine-tuning (Tinh chỉnh): Sau khi đã được pre-train, mô hình được tinh chỉnh trên một tập dữ liệu nhỏ hơn, có gắn nhãn (labeled data) để thích nghi với một tác vụ hoặc một miền kiến thức chuyên biệt.4 Ví dụ, một mô hình chung có thể được fine-tune trên dữ liệu khiếu nại của khách hàng để trở thành một hệ thống phân loại chuyên biệt.36
+Continuous Pre-training (Đào tạo sơ bộ liên tục): Phương pháp này nằm ở giữa pre-training và fine-tuning.37 Nó là quá trình tiếp tục đào tạo một mô hình đã có trên một tập dữ liệu lớn nhưng chưa gắn nhãn, chuyên biệt cho một miền cụ thể (ví dụ: tài liệu y khoa, văn bản pháp lý).20 Mục đích của phương pháp này là để mô hình làm quen với từ vựng, ngữ pháp và cấu trúc đặc trưng của miền đó, giúp mô hình "nói cùng một ngôn ngữ" với domain trước khi thực hiện fine-tuning.20
+Một điểm khác biệt quan trọng cần được làm rõ là sự khác nhau giữa fine-tuning và continuous pre-training. Fine-tuning chủ yếu nhằm cải thiện hiệu suất kỹ thuật cho một TÁC VỤ cụ thể (ví dụ: phân loại văn bản, tóm tắt) bằng cách sử dụng dữ liệu có nhãn.20 Ngược lại, continuous pre-training nhằm mục đích
+đưa kiến thức MIỀN CHUYÊN BIỆT vào mô hình (ví dụ: các thuật ngữ tài chính, ngôn ngữ pháp lý) bằng cách sử dụng dữ liệu không nhãn.20 Do đó, lựa chọn đúng phương pháp phụ thuộc vào bản chất của dữ liệu và mục tiêu cuối cùng. Nếu domain không quá khác biệt so với dữ liệu pre-training ban đầu, fine-tuning là đủ. Nhưng nếu domain có từ vựng và cấu trúc độc đáo, continuous pre-training là cần thiết để mô hình hiểu ngữ cảnh trước khi fine-tuning tác vụ.20
+
+Các Phương pháp Fine-tuning
+
+Instruction Tuning (Tinh chỉnh theo hướng dẫn): Đây là một phương pháp fine-tuning phổ biến, sử dụng các cặp dữ liệu có cấu trúc prompt-response để dạy mô hình cách tuân thủ các hướng dẫn rõ ràng.38 Nó được sử dụng để thích nghi mô hình với một tác vụ mới, thay đổi phong cách phản hồi, hoặc thêm khả năng tuân thủ hướng dẫn.38
+Adapting models for specific domains (Thích nghi với miền cụ thể): Mục tiêu của phương pháp này là tùy chỉnh mô hình để nó hoạt động hiệu quả trong một lĩnh vực cụ thể (ví dụ: y tế, pháp lý).39 Quá trình này thường bắt đầu bằng cách đào tạo sơ bộ mô hình trên một lượng lớn dữ liệu chuyên ngành, sau đó fine-tuning trên một tập dữ liệu nhỏ hơn, có gắn nhãn, đặc thù cho tác vụ.40
+Transfer Learning (Học chuyển giao): Đây là một phương pháp cốt lõi của fine-tuning. Nó sử dụng các trọng số của một mô hình đã được pre-train làm điểm khởi đầu, cho phép quá trình fine-tuning xây dựng dựa trên nền tảng ngôn ngữ đã có.35 Phương pháp này giúp tăng tốc quá trình đào tạo và cải thiện hiệu suất tổng thể.35
