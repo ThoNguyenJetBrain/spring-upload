@@ -144,3 +144,190 @@ Amazon Translate: Dịch vụ dịch máy nơ-ron để dịch văn bản giữa
 Amazon Comprehend: Dịch vụ NLP giúp khám phá thông tin chi tiết và mối quan hệ trong văn bản, chẳng hạn như xác định thực thể, phân tích tình cảm, và trích xuất cụm từ chính.
 Amazon Lex: Dịch vụ để xây dựng các giao diện trò chuyện (chatbot) bằng giọng nói và văn bản. Đây là công nghệ đằng sau Alexa.
 Amazon Polly: Dịch vụ chuyển văn bản thành giọng nói (TTS) tự nhiên.
+Task Statement 1.3: Mô tả vòng đời phát triển ML
+Phần này mô tả quy trình từng bước để đưa một mô hình ML từ ý tưởng đến sản xuất và vận hành.
+Mục tiêu 1.3.1: Mô tả các thành phần của một đường ống ML (ML pipeline)
+Vòng đời phát triển ML là một quy trình lặp đi lặp lại, không phải là một đường thẳng.
+Thu thập dữ liệu (Data Collection): Tập hợp dữ liệu thô từ nhiều nguồn khác nhau (cơ sở dữ liệu, API, tệp tin).
+Phân tích dữ liệu khám phá (Exploratory Data Analysis - EDA): Tìm hiểu, trực quan hóa và tóm tắt dữ liệu để hiểu các đặc điểm, tìm ra các mẫu và xác định các vấn đề về chất lượng.
+Tiền xử lý dữ liệu (Data Pre-processing): Làm sạch và chuyển đổi dữ liệu thô thành một định dạng phù hợp cho việc huấn luyện mô hình. Các bước bao gồm xử lý các giá trị bị thiếu, chuẩn hóa dữ liệu, v.v.
+Kỹ thuật đặc trưng (Feature Engineering): Tạo ra các đặc trưng (biến đầu vào) mới từ dữ liệu hiện có để cải thiện hiệu suất của mô hình. Đây thường là bước tốn nhiều thời gian và sáng tạo nhất.
+Huấn luyện mô hình (Model Training): Chạy thuật toán ML trên dữ liệu đã được xử lý để tạo ra một mô hình.
+Tinh chỉnh siêu tham số (Hyperparameter Tuning): Tìm kiếm bộ siêu tham số (các cài đặt của thuật toán, không được học từ dữ liệu) tốt nhất để tối ưu hóa hiệu suất của mô hình.
+Đánh giá (Evaluation): Đánh giá hiệu suất của mô hình trên một tập dữ liệu riêng biệt (tập kiểm tra) để xem nó hoạt động tốt như thế nào trên dữ liệu mới.
+Triển khai (Deployment): Tích hợp mô hình đã được huấn luyện vào một ứng dụng sản xuất để nó có thể bắt đầu đưa ra dự đoán.
+Giám sát (Monitoring): Theo dõi liên tục hiệu suất của mô hình trong môi trường sản xuất để phát hiện sự suy giảm hiệu suất (model drift) và quyết định khi nào cần huấn luyện lại.
+Mục tiêu 1.3.2: Hiểu các nguồn của mô hình ML
+Mô hình được đào tạo trước mã nguồn mở (Open source pre-trained models): Các mô hình đã được huấn luyện trên các bộ dữ liệu lớn (ví dụ: hình ảnh từ ImageNet, văn bản từ Wikipedia) và được cung cấp miễn phí. Chúng có thể được sử dụng trực tiếp hoặc tinh chỉnh (fine-tuning) trên bộ dữ liệu nhỏ hơn của riêng bạn.
+Lợi ích: Tiết kiệm thời gian và chi phí tính toán.
+Ví dụ: BERT cho NLP, ResNet cho thị giác máy tính.
+Huấn luyện mô hình tùy chỉnh (Training custom models): Xây dựng và huấn luyện một mô hình từ đầu bằng cách sử dụng dữ liệu và thuật toán của riêng bạn.
+Lợi ích: Mô hình được tối ưu hóa cho trường hợp sử dụng cụ thể của bạn.
+Yêu cầu: Cần nhiều dữ liệu, chuyên môn và tài nguyên tính toán.
+Mục tiêu 1.3.3: Mô tả các phương pháp sử dụng mô hình trong sản xuất
+Dịch vụ API được quản lý (Managed API service): Triển khai mô hình của bạn như một điểm cuối (endpoint) API được quản lý bởi một nhà cung cấp dịch vụ đám mây như AWS (ví dụ: Amazon SageMaker Endpoints).
+Lợi ích: Dễ dàng, tự động mở rộng, không cần quản lý cơ sở hạ tầng.
+API tự lưu trữ (Self-hosted API): Tự bạn triển khai mô hình trên máy chủ của riêng mình (tại chỗ hoặc trên máy ảo đám mây).
+Lợi ích: Toàn quyền kiểm soát môi trường, có thể tiết kiệm chi phí hơn trong một số trường hợp.
+Nhược điểm: Yêu cầu nhiều nỗ lực quản lý và bảo trì.
+Mục tiêu 1.3.4: Xác định các dịch vụ và tính năng AWS liên quan cho từng giai đoạn của đường ống ML
+Giai đoạn đường ống ML
+Dịch vụ/Tính năng AWS liên quan
+Thu thập & Lưu trữ dữ liệu
+Amazon S3, Amazon Redshift, AWS Glue
+EDA & Tiền xử lý dữ liệu
+Amazon SageMaker Data Wrangler, Amazon EMR
+Kỹ thuật đặc trưng
+Amazon SageMaker Feature Store
+Huấn luyện & Tinh chỉnh
+Amazon SageMaker Training Jobs
+Đánh giá & So sánh
+Amazon SageMaker Experiments
+Triển khai
+Amazon SageMaker Endpoints
+Giám sát
+Amazon SageMaker Model Monitor
+Điều phối toàn bộ quy trình
+Amazon SageMaker Pipelines
+
+Mục tiêu 1.3.5: Hiểu các khái niệm cơ bản của vận hành ML (MLOps)
+MLOps là tập hợp các thực tiễn nhằm mục đích triển khai và duy trì các mô hình ML trong sản xuất một cách đáng tin cậy và hiệu quả. Nó kết hợp ML, DevOps và Kỹ thuật dữ liệu.
+Thử nghiệm (Experimentation): Theo dõi và so sánh các lần chạy huấn luyện khác nhau để tìm ra mô hình tốt nhất.
+Quy trình lặp lại (Repeatable processes): Tự động hóa toàn bộ đường ống ML để đảm bảo tính nhất quán và giảm thiểu lỗi thủ công.
+Hệ thống có thể mở rộng (Scalable systems): Xây dựng các hệ thống có thể xử lý lượng dữ liệu và lưu lượng truy cập ngày càng tăng.
+Quản lý nợ kỹ thuật (Managing technical debt): Nợ kỹ thuật trong ML có thể tích tụ do các lối tắt trong việc chuẩn bị dữ liệu, kỹ thuật đặc trưng hoặc giám sát mô hình. MLOps giúp quản lý điều này.
+Đạt được sự sẵn sàng cho sản xuất (Achieving production readiness): Đảm bảo mô hình không chỉ chính xác mà còn mạnh mẽ, an toàn và có thể giám sát được trước khi triển khai.
+Giám sát mô hình (Model monitoring): Theo dõi sự thay đổi trong dữ liệu đầu vào và hiệu suất của mô hình theo thời gian.
+Huấn luyện lại mô hình (Model re-training): Tự động hóa quy trình huấn luyện lại mô hình trên dữ liệu mới để duy trì sự phù hợp của nó.
+Mục tiêu 1.3.6: Hiểu các chỉ số hiệu suất mô hình và chỉ số kinh doanh
+Việc đánh giá một mô hình cần cả hai loại chỉ số:
+Chỉ số hiệu suất mô hình (Model Performance Metrics): Đo lường mức độ "chính xác" của các dự đoán của mô hình từ góc độ thống kê.
+Độ chính xác (Accuracy): (Số dự đoán đúng) / (Tổng số dự đoán). Hữu ích khi các lớp cân bằng.
+AUC (Area Under the ROC Curve): Một chỉ số tốt để đánh giá các mô hình phân loại nhị phân, đặc biệt là với dữ liệu không cân bằng. Giá trị càng gần 1, mô hình càng tốt.
+F1 Score: Trung bình điều hòa của Precision và Recall. Hữu ích khi có sự đánh đổi giữa dương tính giả và âm tính giả.
+Chỉ số kinh doanh (Business Metrics): Đo lường tác động của mô hình đối với các mục tiêu kinh doanh. Đây là thước đo thành công cuối cùng.
+Chi phí cho mỗi người dùng (Cost per user): Chi phí vận hành mô hình là bao nhiêu?
+Chi phí phát triển (Development costs): Chi phí để xây dựng mô hình là bao nhiêu?
+Phản hồi của khách hàng (Customer feedback): Khách hàng có hài lòng với các đề xuất hoặc dự đoán của mô hình không?
+Lợi tức đầu tư (Return on Investment - ROI): Mô hình có giúp tăng doanh thu hoặc giảm chi phí đủ để bù đắp cho việc đầu tư vào nó không?
+
+Tài liệu học tập cho Domain 2: Nguyên lý cơ bản của AI tạo sinh
+Lời Nói Đầu: Giới Thiệu về AI Tạo Sinh và Chứng Chỉ AWS AI Practitioner
+Trí tuệ nhân tạo tạo sinh (Generative AI) đại diện cho một bước tiến mang tính cách mạng trong lĩnh vực trí tuệ nhân tạo (AI), mở ra khả năng tạo ra nội dung và ý tưởng mới một cách độc đáo và sáng tạo [1, 2]. Công nghệ này không chỉ giới hạn ở việc phân tích dữ liệu cũ mà còn sử dụng kiến thức đã học để giải quyết các vấn đề mới, từ đó nâng cao năng suất, thúc đẩy đổi mới sáng tạo và tạo ra giá trị kinh doanh đột phá [1, 3, 4]. Sự ra đời của các mô hình nền tảng (Foundation Models - FMs) và mô hình ngôn ngữ lớn (Large Language Models - LLMs) đã định hình kỷ nguyên mới, nơi các tổ chức có thể ứng dụng AI để tự động hóa, cá nhân hóa trải nghiệm khách hàng và tối ưu hóa quy trình hoạt động [5].
+Tài liệu này được biên soạn nhằm cung cấp một cái nhìn toàn diện và có hệ thống về các nguyên lý cơ bản của AI tạo sinh, tập trung vào các chủ đề chính trong Domain 2 của kỳ thi chứng chỉ AWS Certified AI Practitioner. Báo cáo này sẽ đi sâu vào các khái niệm nền tảng, phân tích các trường hợp sử dụng, đánh giá cả khả năng và hạn chế của công nghệ, đồng thời mô tả chi tiết các dịch vụ và cơ sở hạ tầng của AWS hỗ trợ việc xây dựng các ứng dụng AI tạo sinh.
+
+Phần 1: Các Khái Niệm Cơ Bản về AI Tạo Sinh (Task Statement 2.1)
+1.1. Các Khái Niệm Nền Tảng của AI Tạo Sinh
+
+
+Tokens, Tokenization, Chunking, Embeddings và Vectors
+
+Để một mô hình AI có thể xử lý văn bản, nó không thể hiểu được toàn bộ câu hoặc đoạn văn một cách trực tiếp. Thay vào đó, văn bản cần được phân tách thành các đơn vị nhỏ hơn gọi là "tokens" [6, 7, 8]. Quá trình chuyển đổi này được gọi là "tokenization". Một token có thể là một từ, một phần của từ, hoặc thậm chí là một ký tự [7]. Các mô hình ngôn ngữ chỉ hoạt động trên những đơn vị nhỏ này để tạo ra các đầu ra mạch lạc và có ngữ cảnh [6].
+Đối với các chuỗi đầu vào dài, chẳng hạn như toàn bộ tài liệu hoặc sách, mô hình phải đối mặt với một hạn chế cố hữu: "cửa sổ ngữ cảnh" (context window) có kích thước cố định [6]. Đây là giới hạn về lượng dữ liệu mà mô hình có thể ghi nhớ và xử lý cùng một lúc. Để giải quyết thách thức này, kỹ thuật "chunking" được áp dụng để chia các chuỗi dài thành các phần nhỏ hơn, dễ quản lý hơn [6]. Điều này đảm bảo rằng các đoạn văn bản có thể được xử lý trong giới hạn của cửa sổ ngữ cảnh, duy trì được ngữ cảnh và cấu trúc tổng thể [6].
+Sau khi văn bản được chia thành các token, bước tiếp theo là chuyển đổi chúng thành định dạng mà mô hình có thể thực hiện các phép tính toán. Quá trình này được gọi là "embeddings," biến các token hoặc các loại dữ liệu khác như hình ảnh thành các "vectors" số học [6, 9]. Các vector này mã hóa ý nghĩa ngữ nghĩa của dữ liệu gốc, cho phép mô hình hiểu được các mối quan hệ phức tạp. Chẳng hạn, một mô hình có thể liên kết từ "elephant" với "acacia trees" vì trong dữ liệu huấn luyện, chúng thường xuất hiện cùng nhau [7]. Sự chuyển đổi này là cầu nối giữa ngôn ngữ tự nhiên và logic toán học của mô hình, là nền tảng kỹ thuật cho toàn bộ quá trình tạo sinh.
+
+Prompt Engineering
+
+"Prompt Engineering" là một kỹ năng thiết yếu trong việc tương tác với các mô hình AI tạo sinh [6, 10]. Đây là "nghệ thuật" và "khoa học" của việc tạo ra các câu lệnh (prompts) hiệu quả để điều khiển mô hình tạo ra kết quả mong muốn [6]. Thay vì lập trình bằng mã, người dùng "lập trình" bằng ngôn ngữ tự nhiên. Chất lượng của câu lệnh đầu vào là yếu tố trực tiếp quyết định chất lượng đầu ra [10].
+Các kỹ thuật trong prompt engineering bao gồm:
+Zero-shot learning: Hướng dẫn mô hình thực hiện một tác vụ mà không cung cấp bất kỳ ví dụ nào [6].
+One-shot learning: Cung cấp một ví dụ duy nhất để mô hình học theo [6].
+Few-shot learning: Cung cấp nhiều ví dụ để giúp mô hình hiểu và tái tạo tác vụ [6].
+Sự phổ biến của kỹ thuật này cho thấy một sự thay đổi cơ bản trong cách con người tương tác với máy tính. Các dịch vụ như PartyRock được xây dựng để giúp người dùng phổ thông học kỹ năng này, cho thấy tầm quan trọng của nó trong việc hạ thấp rào cản gia nhập [11, 12].
+
+Mô hình Transformer-based LLMs và Foundation Models (FM)
+
+Kiến trúc mạng nơ-ron "Transformer" đã cách mạng hóa lĩnh vực xử lý ngôn ngữ tự nhiên (NLP) [7, 9]. Ưu điểm cốt lõi của Transformer là khả năng xử lý song song toàn bộ chuỗi dữ liệu đầu vào thông qua một cơ chế gọi là "self-attention" [7]. Điều này giúp các mô hình có thể xử lý các chuỗi dữ liệu lớn một cách hiệu quả hơn nhiều so với các kiến trúc mạng nơ-ron tái phát (RNN) trước đây [6]. Khả năng xử lý song song này là nguyên nhân trực tiếp dẫn đến sự ra đời của các mô hình ngôn ngữ lớn (LLMs) khổng lồ với hàng trăm tỷ, thậm chí hàng nghìn tỷ tham số [7]. LLMs là một phân lớp của FM, được thiết kế đặc biệt cho các tác vụ dựa trên ngôn ngữ như tóm tắt, tạo văn bản, phân loại và trò chuyện [1, 13].
+Mô hình nền tảng (Foundation Models - FMs) là các mô hình học máy được huấn luyện trên một lượng lớn dữ liệu không được dán nhãn [1, 13]. Chúng có khả năng thực hiện một loạt các tác vụ chung và có thể được tùy chỉnh để giải quyết các vấn đề cụ thể [14]. Một xu hướng quan trọng là các doanh nghiệp đang chuyển từ việc xây dựng các mô hình chuyên biệt từ đầu sang sử dụng các FM có sẵn và tinh chỉnh (fine-tune) chúng với dữ liệu riêng của mình [14, 15]. Cách tiếp cận này giúp tiết kiệm tài nguyên tính toán đáng kể và đẩy nhanh tốc độ triển khai ứng dụng [14].
+
+Multi-modal Models và Diffusion Models
+
+Mô hình "đa phương thức" (Multi-modal models) là các mô hình AI có khả năng xử lý và tạo ra nội dung từ nhiều loại dữ liệu khác nhau, chẳng hạn như văn bản, hình ảnh và video, cùng một lúc [6]. Khả năng này thể hiện sự tiến bộ lớn trong việc cho phép AI hiểu và tương tác với thế giới phức tạp. Cần lưu ý rằng khái niệm này không liên quan đến "vận tải đa phương thức" [16, 17], một thuật ngữ trong lĩnh vực logistics.
+"Mô hình khuếch tán" (Diffusion models) là một loại mô hình học máy chuyên biệt để tạo ra dữ liệu, đặc biệt là hình ảnh, bằng cách học cách đảo ngược một quá trình thêm nhiễu (noise) vào dữ liệu ban đầu [6, 18]. Quá trình này bao gồm hai giai đoạn chính: "quá trình khuếch tán xuôi" (forward diffusion process), nơi nhiễu được thêm vào hình ảnh, và "quá trình khuếch tán ngược" (reverse diffusion process), nơi mô hình học cách loại bỏ nhiễu để tái tạo lại hình ảnh gốc [18]. Stable Diffusion [6, 19] là một ví dụ nổi bật, có khả năng tạo ra hình ảnh chân thực từ lời nhắc văn bản, được sử dụng rộng rãi trong các ngành công nghiệp sáng tạo để tạo, chỉnh sửa và phục hồi hình ảnh [6, 19].
+
+1.2. Các Trường Hợp Sử Dụng Tiềm Năng của AI Tạo Sinh
+
+AI tạo sinh đang chuyển mình từ một công cụ nghiên cứu sang một nền tảng hỗ trợ đa chức năng, có thể áp dụng trong nhiều lĩnh vực:
+Tạo nội dung đa phương thức: Tạo hình ảnh, video và âm thanh từ các câu lệnh văn bản [1, 6]. Ứng dụng trong truyền thông, giải trí, và thiết kế [1, 20].
+Tạo văn bản:
+Chatbots và Trợ lý ảo: Cung cấp trải nghiệm dịch vụ khách hàng 24/7 và phản hồi nhanh chóng [1, 5].
+Tóm tắt và phân tích tài liệu: Hỗ trợ các nhà quản lý tạo báo cáo và dự báo [1, 20].
+Tạo nội dung và viết mã: Tạo email, blog, quảng cáo, hoặc đề xuất mã phần mềm mới [1, 21].
+Ứng dụng trong các ngành cụ thể:
+Tiếp thị và bán hàng: Tạo các chiến dịch tiếp thị hấp dẫn và nội dung email cá nhân hóa [1, 21].
+Phát triển sản phẩm và thiết kế: Hỗ trợ các nhà thiết kế đồ họa tạo ra các nguyên mẫu và ý tưởng mới một cách nhanh chóng [1, 20].
+Doanh nghiệp: Phân tích dữ liệu lớn để tìm ra các xu hướng tiềm ẩn và đưa ra các quyết định dựa trên dữ liệu [5].
+1.3. Vòng Đời của Foundation Model
+
+Vòng đời của một mô hình nền tảng (FM) phản ánh các giai đoạn của quy trình phát triển phần mềm (SDLC) và MLOps truyền thống [14, 22, 23], đảm bảo tính hệ thống và khả năng cải tiến liên tục [14]. Các giai đoạn chính bao gồm:
+Phạm vi (Scoping): Giai đoạn đầu tiên và quan trọng nhất, nơi xác định rõ ràng vấn đề kinh doanh cần giải quyết, mục tiêu dự án, và các chỉ số đo lường thành công [24]. Việc xác định rõ phạm vi ngay từ đầu giúp tránh lãng phí tài nguyên và tập trung vào những mục tiêu có tác động lớn [14].
+Lựa chọn mô hình (Model selection): Đánh giá và lựa chọn mô hình nền tảng phù hợp nhất với yêu cầu cụ thể của doanh nghiệp [14, 24]. Quá trình này cân nhắc giữa việc sử dụng mô hình được tiền huấn luyện có sẵn và tùy chỉnh chúng, hay huấn luyện một mô hình từ đầu cho các trường hợp chuyên biệt [14].
+Tùy chỉnh mô hình (Model customization): Tinh chỉnh mô hình đã chọn bằng cách sử dụng dữ liệu độc quyền của doanh nghiệp [24].
+Phát triển và tích hợp (Development and integration): Xây dựng ứng dụng xung quanh mô hình và tích hợp nó vào cơ sở hạ tầng hoặc quy trình làm việc hiện có [24].
+Triển khai (Deployment): Đưa mô hình vào môi trường sản xuất. Giai đoạn này yêu cầu đảm bảo mô hình hoạt động hiệu quả, độ trễ thấp và có thể mở rộng [14].
+Cải tiến liên tục (Continuous improvement): Sau khi triển khai, mô hình được theo dõi liên tục để đánh giá hiệu suất, thu thập phản hồi từ người dùng và dữ liệu mới, từ đó điều chỉnh và tối ưu hóa theo thời gian [14, 24].
+Sự nhấn mạnh vào giai đoạn "scoping" và "cải tiến liên tục" cho thấy một dự án AI tạo sinh thành công không chỉ dựa vào công nghệ mà còn phụ thuộc vào việc xác định vấn đề kinh doanh đúng đắn và một quy trình quản lý vòng đời chặt chẽ [24].
+
+Phần 2: Khả Năng và Hạn Chế trong Giải Quyết Bài Toán Kinh Doanh (Task Statement 2.2)
+2.1. Ưu Điểm của AI Tạo Sinh
+
+AI tạo sinh mang lại nhiều lợi ích vượt trội cho các doanh nghiệp, thể hiện qua các đặc điểm chính sau:
+Tính thích ứng (Adaptability) và tính phản hồi (Responsiveness): Khả năng của AI tạo sinh trong việc hiểu và xử lý các lượng dữ liệu phức tạp nhanh hơn con người giúp tăng tốc độ ra quyết định [20]. Nhờ giao tiếp qua ngôn ngữ tự nhiên, một mô hình có thể được áp dụng cho nhiều nhiệm vụ khác nhau chỉ bằng cách thay đổi câu lệnh, không cần huấn luyện lại, từ đó thể hiện tính thích ứng cao [21].
+Tính đơn giản (Simplicity): Giao diện tương tác dựa trên ngôn ngữ tự nhiên làm giảm đáng kể rào cản kỹ thuật. Người dùng không chuyên cũng có thể dễ dàng sử dụng AI tạo sinh để tạo nội dung, hỗ trợ công việc và khám phá dữ liệu, từ đó dân chủ hóa công nghệ AI [20].
+Năng suất và hiệu quả: AI tạo sinh có thể tự động hóa các tác vụ lặp đi lặp lại và hỗ trợ các công việc sáng tạo [20, 25]. Ví dụ, nó có thể tạo ra các bản nháp báo cáo, tóm tắt tài liệu, hoặc đề xuất ý tưởng thiết kế, giúp nhân viên tập trung vào các nhiệm vụ chiến lược và đổi mới hơn [13, 20, 21].
+
+2.2. Nhược Điểm và Thách Thức của AI Tạo Sinh
+
+Mặc dù mang lại nhiều lợi ích, AI tạo sinh cũng có những hạn chế đáng kể mà các tổ chức cần cân nhắc:
+Hallucinations (Ảo giác) và Inaccuracy (Tính không chính xác): Đây là hiện tượng mô hình AI tạo ra thông tin sai lệch, không chính xác hoặc không có cơ sở trong dữ liệu huấn luyện [10, 26]. Nguyên nhân xuất phát từ việc mô hình suy luận vượt quá giới hạn kiến thức, thiếu cơ chế kiểm chứng nguồn tin và có thể bị ảnh hưởng bởi dữ liệu đầu vào không đầy đủ [26]. Vấn đề này có thể gây mất lòng tin từ phía người dùng và doanh nghiệp [26].
+Interpretability (Khả năng diễn giải): Các mô hình AI tạo sinh thường được coi là "hộp đen" [1, 27], nơi rất khó để hiểu cách chúng đưa ra một kết quả cụ thể. Khả năng diễn giải là yếu tố then chốt để xây dựng niềm tin, phát hiện và giảm thiểu sai lệch trong mô hình, gỡ lỗi và tuân thủ các quy định pháp lý, đặc biệt trong các ngành như tài chính, y tế, và tư pháp [28].
+Các hạn chế khác:
+Nondeterminism (Tính phi xác định): Cùng một câu lệnh có thể tạo ra các kết quả khác nhau mỗi lần chạy [8].
+Chi phí: Việc đào tạo và vận hành các mô hình AI tạo sinh đòi hỏi tài nguyên tính toán và chi phí đáng kể [1].
+Bảo mật và quyền riêng tư: Rủi ro về quyền riêng tư và bảo mật dữ liệu sẽ phát sinh nếu dữ liệu độc quyền của doanh nghiệp được sử dụng để tùy chỉnh các mô hình [1, 5, 25].
+
+2.3. Các Yếu Tố Lựa Chọn Mô Hình AI Tạo Sinh
+
+Quy trình lựa chọn mô hình AI tạo sinh phải được thực hiện một cách có hệ thống, bắt đầu từ việc xác định rõ vấn đề kinh doanh [24]. Các yếu tố chính cần xem xét bao gồm:
+Loại mô hình: Lựa chọn mô hình phù hợp với loại hình nhiệm vụ (văn bản, hình ảnh, đa phương thức) [24].
+Yêu cầu hiệu suất: Đánh giá độ chính xác, độ trễ và khả năng đáp ứng các yêu cầu cụ thể của ứng dụng [24].
+Khả năng và Hạn chế: Cân nhắc kích thước mô hình, cửa sổ ngữ cảnh và khả năng xử lý các nhiệm vụ phức tạp [24].
+Tuân thủ: Đảm bảo mô hình đáp ứng các tiêu chuẩn về đạo đức, bảo mật và pháp lý [2].
+Cân bằng chi phí: Đánh giá chi phí đầu tư ban đầu và chi phí vận hành theo thời gian [24].
+
+2.4. Đo Lường Giá Trị Kinh Doanh và Các Chỉ Số
+
+Giá trị của một ứng dụng AI tạo sinh không được đo lường bằng hiệu suất kỹ thuật mà bằng các kết quả kinh doanh cuối cùng mà nó mang lại [3, 29]. Các chỉ số đo lường hiệu quả có thể được chia thành nhiều nhóm:
+Hiệu suất Kinh doanh (Business Performance):
+Tăng trưởng doanh thu [29].
+Tối ưu hóa chi phí (ví dụ, tiết kiệm tới 30% chi phí vận hành nhờ tự động hóa) [29].
+ROI (Lợi tức đầu tư) [29].
+Hiệu quả (Efficiency):
+Thời gian hoàn thành tác vụ [29].
+Khối lượng công việc được xử lý [29].
+Giảm tỷ lệ lỗi [29].
+Trải nghiệm Khách hàng (Customer Experience):
+Tốc độ phản hồi (ví dụ, chatbot giảm thời gian phản hồi từ vài giờ xuống vài giây) [29].
+Tỷ lệ hài lòng của khách hàng (CSAT) [29].
+Tỷ lệ giữ chân khách hàng (Retention Rate) [29].
+Hiệu quả Marketing:
+Tỷ lệ chuyển đổi (Conversion Rate) [29].
+Giá trị trọn đời của khách hàng (CLV) [29].
+
+Phần 3: Cơ Sở Hạ Tầng và Công Nghệ AWS (Task Statement 2.3)
+
+3.1. Các Dịch Vụ và Tính Năng AWS để Phát Triển Ứng Dụng AI Tạo Sinh
+
+AWS cung cấp một bộ dịch vụ toàn diện được thiết kế để hỗ trợ mọi giai đoạn của vòng đời AI tạo sinh, từ thử nghiệm đến triển khai quy mô lớn [1].
+Amazon SageMaker JumpStart:
+Chức năng: Một trung tâm máy học (ML Hub) giúp tăng tốc hành trình ML [30, 31]. SageMaker JumpStart cung cấp hàng trăm mô hình được tiền huấn luyện và các thuật toán tích hợp sẵn [30, 31].
+Lợi ích: Người dùng có thể nhanh chóng khám phá, triển khai và tùy chỉnh các mô hình nền tảng bằng dữ liệu riêng của mình, tất cả đều được đảm bảo an toàn vì dữ liệu không rời khỏi đám mây riêng ảo (VPC) [30].
+Amazon Bedrock:
+Chức năng: Một dịch vụ được quản lý toàn phần, cung cấp quyền truy cập vào các mô hình nền tảng (FMs) hàng đầu từ các công ty AI hàng đầu thông qua một API duy nhất [15].
+Lợi ích: Bedrock cung cấp sự lựa chọn đa dạng về mô hình, các công cụ tùy chỉnh linh hoạt, và các hàng rào bảo vệ như Bedrock Guardrails để giảm thiểu nội dung có hại và ảo giác [15].
+PartyRock:
+Chức năng: Một môi trường thử nghiệm "không cần mã" (no-code playground) được cung cấp bởi Amazon Bedrock [11, 32]. Nền tảng này được thiết kế để người dùng, đặc biệt là những người không có kinh nghiệm lập trình, có thể học prompt engineering và xây dựng các ứng dụng AI tạo sinh một cách nhanh chóng và thú vị [12].
+Lợi ích: Rào cản gia nhập thấp, dễ dàng thử nghiệm và chia sẻ ứng dụng [12, 32].
+Amazon Q:
+Chức năng: Một trợ lý AI được thiết kế đặc biệt cho doanh nghiệp [33]. Amazon Q kết nối với dữ liệu nội bộ của công ty (tài liệu, wiki, cơ sở dữ liệu) để trả lời câu hỏi và tự động hóa các quy trình làm việc [34, 35].
+Lợi ích: Tăng năng suất cho nhân viên bằng cách cung cấp thông tin thống nhất, chính xác và có ngữ cảnh, đồng thời đảm bảo tuân thủ các chính sách bảo mật và quyền truy cập của doanh nghiệp [34].
